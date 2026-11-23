@@ -3,7 +3,19 @@ import type { MediaDirection } from '../data/projects';
 
 export interface MediaLayout {
   stage: { left: string; top: string; width: string; aspectRatio: string };
-  object: { left: string; top: string; width: string; transformOrigin: string; scale: number };
+  object: {
+    left: string;
+    top: string;
+    width: string;
+    /** Resting enlargement and its origin (object box percentages). */
+    scale: number;
+    ox: string;
+    oy: string;
+    /** Detail the hover/focus approach moves toward (object box percentages). */
+    dx: string;
+    dy: string;
+    hover: number;
+  };
   /** Device scale relative to native pixels when the frame is `refWidth` CSS px wide. */
   nativeScale: number;
 }
@@ -32,6 +44,8 @@ export function layoutMedia(dir: MediaDirection, aspect: number, refWidth = 371)
   let k = dir.objectScale ?? 1;
   if (artNative * k > dir.maxScale) k = Math.max(1, dir.maxScale / artNative);
   const origin = dir.objectOrigin ?? [obj.w / 2, obj.h / 2];
+  const detail = dir.detail ?? origin;
+  const pct = (v: number, of: number) => `${(v / of) * 100}%`;
 
   return {
     stage: {
@@ -41,11 +55,15 @@ export function layoutMedia(dir: MediaDirection, aspect: number, refWidth = 371)
       aspectRatio: `${art.w} / ${art.h}`,
     },
     object: {
-      left: `${((obj.x - art.x) / art.w) * 100}%`,
-      top: `${((obj.y - art.y) / art.h) * 100}%`,
-      width: `${(obj.w / art.w) * 100}%`,
-      transformOrigin: `${(origin[0] / obj.w) * 100}% ${(origin[1] / obj.h) * 100}%`,
+      left: pct(obj.x - art.x, art.w),
+      top: pct(obj.y - art.y, art.h),
+      width: pct(obj.w, art.w),
       scale: k,
+      ox: pct(origin[0], obj.w),
+      oy: pct(origin[1], obj.h),
+      dx: pct(detail[0], obj.w),
+      dy: pct(detail[1], obj.h),
+      hover: dir.hover ?? 1.075,
     },
     nativeScale: artNative * k,
   };

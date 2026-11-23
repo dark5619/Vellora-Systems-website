@@ -1,5 +1,5 @@
 import type { CSSProperties } from 'react';
-import { asset, srcSet, type AssetKey } from '../lib/assets';
+import { asset, avifSet, srcSet, type AssetKey } from '../lib/assets';
 
 interface Props {
   k: AssetKey;
@@ -13,37 +13,58 @@ interface Props {
 /**
  * A full-bleed background plate from the source design.
  *
- * At or below the reference width it scales with the page (one source pixel per --dp).
- * Wider than that, the sharp plate stays at native size, centred with the content column,
- * and a blurred copy of the same plate fills the margins behind a soft edge mask —
- * no bitmap is ever upscaled past its native resolution.
+ * Desktop: laid out in reference pixels (one source pixel per --dp), full width, centred by
+ * layout (not by a transform, which would resample the bitmap half a pixel off). Below that it
+ * covers its section with an art-directed focal point. AVIF 4:4:4 with a 2× enlargement for wide
+ * and high-density screens; WebP fallback.
  */
 export function Plate({ k, className = '', focus = '50% 50%', priority = false, alt = '' }: Props) {
   const a = asset(k);
-  const set = srcSet(k);
-  const common = {
-    width: a.w,
-    height: a.h,
-    decoding: priority ? ('sync' as const) : ('async' as const),
-    loading: priority ? ('eager' as const) : ('lazy' as const),
-    draggable: false,
-  };
+  const webp = srcSet(k);
+  const avif = avifSet(k);
+  // Desktop draws the plate at the viewport width; phones crop it (object-fit: cover).
+  const sizes = '(min-width: 1024px) 100vw, 160vw';
   return (
     <div
       className={`plate ${alt ? '' : 'decor'} ${className}`}
       aria-hidden={alt ? undefined : true}
       style={{ '--pw': a.w, '--ph': a.h, '--focus': focus } as CSSProperties}
     >
-      <img className="plate__fill" src={a.srcHalf ?? a.src} alt="" {...common} loading="lazy" decoding="async" />
-      <img
-        className="plate__img"
-        src={a.src}
-        srcSet={set}
-        sizes={set ? `(min-width: ${a.w}px) ${a.w}px, 100vw` : undefined}
-        alt={alt}
-        {...common}
-        {...(priority ? { fetchpriority: 'high' } : {})}
-      />
+      <picture>
+        {avif && <source type="image/avif" srcSet={avif} sizes={sizes} />}
+        <img
+          className="plate__img"
+          src={a.src}
+          srcSet={webp}
+          sizes={webp ? sizes : undefined}
+          alt={alt}
+          width={a.w}
+          height={a.h}
+          decoding={priority ? 'sync' : 'async'}
+          loading={priority ? 'eager' : 'lazy'}
+          draggable={false}
+          {...(priority ? { fetchpriority: 'high' } : {})}
+        />
+      </picture>
+    </div>
+  );
+}
+
+/**
+ * Desktop continuation below a plate: the same bitmap mirrored about its last row and faded out,
+ * like a reflection on the floor of the scene. It meets the plate's edge pixel for pixel, so the
+ * section boundary has no seam, and it adds no new artwork. Place it as the first child of the
+ * section that follows the plate.
+ */
+export function PlateMirror({ k, className = '' }: { k: AssetKey; className?: string }) {
+  const a = asset(k);
+  const avif = avifSet(k);
+  return (
+    <div className={`plate-mirror decor ${className}`} aria-hidden="true" style={{ '--pw': a.w, '--ph': a.h } as CSSProperties}>
+      <picture>
+        {avif && <source type="image/avif" srcSet={avif} sizes="100vw" />}
+        <img className="plate-mirror__img" src={a.src} alt="" width={a.w} height={a.h} decoding="async" loading="lazy" draggable={false} />
+      </picture>
     </div>
   );
 }

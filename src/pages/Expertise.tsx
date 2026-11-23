@@ -1,6 +1,6 @@
-import type { CSSProperties } from 'react';
+import { useState, type CSSProperties } from 'react';
 import { Link } from 'react-router-dom';
-import { Plate } from '../components/Plate';
+import { Plate, PlateMirror } from '../components/Plate';
 import { ButtonLink, Eyebrow, Glyph, Img } from '../components/primitives';
 import { FACTS } from '../data/site';
 import { usePageTitle } from '../hooks/usePageTitle';
@@ -104,11 +104,18 @@ export function ExpertisePage() {
   usePageTitle('Expertise');
   const core = asset('04-Expertise/artwork/central-v-and-platform');
   const coreV = asset('04-Expertise/artwork/central-v');
+  // One connection at a time: the capability under the pointer or holding focus lights its path to
+  // the central V; the others step back so the eye can follow it across the composition.
+  const [active, setActive] = useState<string | null>(null);
+  const path = (c: Capability) => `M${c.link.from.join(' ')} C${c.link.c1.join(' ')} ${c.link.c2.join(' ')} ${c.link.to.join(' ')}`;
 
   return (
     <div className="page page--expertise">
       <section className="exp" aria-labelledby="exp-title">
         <Plate k="04-Expertise/backgrounds/earth-and-dotted-waves" priority focus="10% 70%" />
+        <div className="exp__below decor" aria-hidden="true">
+          <PlateMirror k="04-Expertise/backgrounds/earth-and-dotted-waves" />
+        </div>
 
         <div className="exp__intro">
           <Eyebrow flash="expertise" className="exp__eyebrow">
@@ -133,7 +140,7 @@ export function ExpertisePage() {
           </ButtonLink>
         </div>
 
-        <div className="exp__diagram">
+        <div className="exp__diagram" data-active={active ?? undefined}>
           <svg className="exp__links decor" viewBox="0 0 1672 941" aria-hidden="true" preserveAspectRatio="none">
             <defs>
               <linearGradient id="exp-link-l" x1="0" x2="1">
@@ -156,15 +163,31 @@ export function ExpertisePage() {
               {CAPS.map((c) => (
                 <path
                   key={c.id}
-                  className={`exp__path exp__path--${c.tone}`}
+                  className={`exp__path exp__path--${c.tone}${active === c.id ? ' is-active' : ''}`}
                   stroke={c.link.from[0] < 945 ? 'url(#exp-link-l)' : 'url(#exp-link-r)'}
-                  d={`M${c.link.from.join(' ')} C${c.link.c1.join(' ')} ${c.link.c2.join(' ')} ${c.link.to.join(' ')}`}
+                  d={path(c)}
                 />
               ))}
             </g>
+            {/* The lit connection: a bright line, one pulse from the card to the V, and a point of
+                light where it meets the platform. Re-keyed so each activation replays once. */}
+            {CAPS.filter((c) => c.id === active).map((c) => (
+              <g key={c.id} className={`exp__lit exp__lit--${c.tone}`}>
+                <path className="exp__lit-glow" d={path(c)} pathLength={100} filter="url(#exp-glow)" />
+                <path className="exp__lit-line" d={path(c)} pathLength={100} />
+                <path className="exp__lit-pulse" d={path(c)} pathLength={100} />
+                <circle className="exp__lit-end" cx={c.link.to[0]} cy={c.link.to[1]} r="5" />
+              </g>
+            ))}
             <g>
               {CAPS.map((c) => (
-                <circle key={c.id} className={`exp__node exp__node--${c.tone}`} cx={c.link.from[0]} cy={c.link.from[1]} r="4.2" />
+                <circle
+                  key={c.id}
+                  className={`exp__node exp__node--${c.tone}${active === c.id ? ' is-active' : ''}`}
+                  cx={c.link.from[0]}
+                  cy={c.link.from[1]}
+                  r="4.2"
+                />
               ))}
             </g>
           </svg>
@@ -182,7 +205,11 @@ export function ExpertisePage() {
               return (
                 <li
                   key={c.id}
-                  className={`ecard ecard--${c.tone} ecard--${c.id}`}
+                  className={`ecard ecard--${c.tone} ecard--${c.id}${active === c.id ? ' is-active' : ''}`}
+                  onPointerEnter={(e) => e.pointerType === 'mouse' && setActive(c.id)}
+                  onPointerLeave={(e) => e.pointerType === 'mouse' && setActive((a) => (a === c.id ? null : a))}
+                  onFocus={() => setActive(c.id)}
+                  onBlur={() => setActive((a) => (a === c.id ? null : a))}
                   style={
                     {
                       '--x': c.card.x,

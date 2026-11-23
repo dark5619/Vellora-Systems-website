@@ -1,9 +1,10 @@
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { Plate } from '../components/Plate';
+import { Plate, PlateMirror } from '../components/Plate';
 import { RibbonEdge } from '../components/RibbonEdge';
 import { ButtonLink, Glyph, Img } from '../components/primitives';
 import { usePageTitle } from '../hooks/usePageTitle';
+import { DeviceHandoff } from './DeviceHandoff';
 import type { AssetKey } from '../lib/assets';
 import './StreamingCaseStudy.css';
 
@@ -55,11 +56,13 @@ const TRENDING: AssetKey[] = [
 export function StreamingCaseStudyPage() {
   usePageTitle('Streaming Platform for Global Audiences — Case Study');
   const viewsRef = useRef<HTMLDialogElement>(null);
+  const heroRef = useRef<HTMLElement>(null);
 
   return (
     <div className="page page--case">
-      <section className="cs-hero" aria-labelledby="cs-title">
+      <section ref={heroRef} className="cs-hero" aria-labelledby="cs-title">
         <Plate k="03-Case-Study/backgrounds/streaming-hero" priority focus="78% 50%" />
+        <DeviceHandoff trigger={heroRef} />
         <div className="col cs-hero__inner">
           <p className="cs-eyebrow">
             <span className="cs-eyebrow__dash" aria-hidden="true" />
@@ -109,6 +112,7 @@ export function StreamingCaseStudyPage() {
       </section>
 
       <section className="col cs-facts" aria-label="Project overview">
+        <PlateMirror k="03-Case-Study/backgrounds/streaming-hero" />
         <dl className="cs-facts__list">
           {FACTS.map((f) => (
             <div key={f.cls} className={`cs-fact cs-fact--${f.cls}`}>

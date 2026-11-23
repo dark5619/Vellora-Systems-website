@@ -1,42 +1,56 @@
 import type { CSSProperties, ImgHTMLAttributes, ReactNode } from 'react';
 import { Link, type LinkProps } from 'react-router-dom';
-import { asset, srcSet, type AssetKey } from '../lib/assets';
+import { asset, avifSet, glyphSet, srcSet, type AssetKey } from '../lib/assets';
 
 type ImgProps = Omit<ImgHTMLAttributes<HTMLImageElement>, 'src' | 'width' | 'height' | 'alt'> & {
   k: AssetKey;
   alt: string;
   priority?: boolean;
+  /**
+   * Rendered width hint for candidate selection. Every supplied bitmap is a 1× crop of its
+   * design, so the hint should describe the largest size the layout draws it at.
+   */
   sizes?: string;
 };
 
-/** Manifest-backed image with intrinsic size, responsive source and sensible loading. */
+/**
+ * Manifest-backed artwork: AVIF 4:4:4 (native + 2× enlargement) with the WebP fallback, intrinsic
+ * size and sensible loading. The <picture> wrapper is `display: contents`, so layout and CSS
+ * selectors treat the <img> as a direct child of the parent.
+ */
 export function Img({ k, alt, priority, sizes, loading, ...rest }: ImgProps) {
   const a = asset(k);
-  const set = srcSet(k);
+  const webp = srcSet(k);
+  const avif = avifSet(k);
+  const s = sizes ?? `${a.w}px`;
   return (
-    <img
-      src={a.src}
-      srcSet={set}
-      sizes={set ? (sizes ?? '100vw') : undefined}
-      width={a.w}
-      height={a.h}
-      alt={alt}
-      loading={priority ? 'eager' : (loading ?? 'lazy')}
-      decoding={priority ? 'sync' : 'async'}
-      // React 18 warns on camelCase fetchPriority; pass the DOM attribute directly.
-      {...(priority ? { fetchpriority: 'high' } : {})}
-      draggable={false}
-      {...rest}
-    />
+    <picture>
+      {avif && <source type="image/avif" srcSet={avif} sizes={s} />}
+      <img
+        src={a.src}
+        srcSet={webp}
+        sizes={webp ? s : undefined}
+        width={a.w}
+        height={a.h}
+        alt={alt}
+        loading={priority ? 'eager' : (loading ?? 'lazy')}
+        decoding={priority ? 'sync' : 'async'}
+        // React 18 warns on camelCase fetchPriority; pass the DOM attribute directly.
+        {...(priority ? { fetchpriority: 'high' } : {})}
+        draggable={false}
+        {...rest}
+      />
+    </picture>
   );
 }
 
-/** Decorative supplied glyph. */
+/** Decorative supplied glyph (native PNG, 2× Lanczos PNG on high-density screens). */
 export function Glyph({ k, className, style }: { k: AssetKey; className?: string; style?: CSSProperties }) {
   const a = asset(k);
   return (
     <img
       src={a.src}
+      srcSet={glyphSet(k)}
       width={a.w}
       height={a.h}
       alt=""

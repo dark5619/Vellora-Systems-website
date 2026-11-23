@@ -53,9 +53,13 @@
 @media (min-width: 640px) {
   .exp__cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
+/* Tinted glass sampled from 04_Expertise: teal-blue, violet, green and blue fills (not one navy),
+   with a near-white specular catch on the rim where the scene's light reaches it. */
 .ecard {
-  --tone: rgba(70, 200, 255, 0.85);
-  --tone-soft: rgba(70, 200, 255, 0.28);
+  --tone: #3fd4ff;
+  --tone-soft: rgba(70, 200, 255, 0.3);
+  --rim: #a9f1ff;
+  --fill: linear-gradient(160deg, rgba(5, 38, 84, 0.9) 0%, rgba(0, 60, 116, 0.85) 58%, rgba(1, 80, 106, 0.87) 100%);
   position: relative;
   display: grid;
   grid-template-columns: 96px 1fr;
@@ -64,18 +68,46 @@
   min-height: 112px;
   padding: 14px 52px 14px 12px;
   border-radius: 18px;
-  border: 1.5px solid var(--tone);
-  background: linear-gradient(160deg, rgba(36, 62, 120, 0.55), rgba(10, 22, 58, 0.82));
-  box-shadow: 0 0 14px var(--tone-soft), inset 0 0 18px rgba(80, 140, 255, 0.12);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  border: 1.5px solid transparent;
+  background: var(--fill) padding-box;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), inset 0 0 20px color-mix(in srgb, var(--tone) 14%, transparent);
+  transition: box-shadow var(--t-reveal) var(--ease);
 }
-.ecard--violet { --tone: rgba(160, 110, 255, 0.9); --tone-soft: rgba(150, 100, 255, 0.3); }
-.ecard--green { --tone: rgba(120, 235, 120, 0.85); --tone-soft: rgba(110, 230, 120, 0.26); }
-.ecard--blue { --tone: rgba(80, 150, 255, 0.85); --tone-soft: rgba(80, 140, 255, 0.28); }
+/* Rim as its own ring (see .ab-stats::before): the glass stays the colour of its fill. */
+.ecard::before {
+  content: '';
+  position: absolute;
+  inset: -1.5px;
+  padding: 1.5px;
+  border-radius: inherit;
+  background: linear-gradient(125deg, var(--rim) 0%, var(--tone) 18%, color-mix(in srgb, var(--tone) 45%, transparent) 55%, var(--tone) 100%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  pointer-events: none;
+}
+.ecard--violet {
+  --tone: #9c7bff;
+  --tone-soft: rgba(150, 100, 255, 0.32);
+  --rim: #e7dcff;
+  --fill: linear-gradient(200deg, rgba(12, 27, 76, 0.9) 0%, rgba(14, 38, 96, 0.86) 48%, rgba(70, 48, 165, 0.85) 100%);
+}
+.ecard--green {
+  --tone: #63e6a0;
+  --tone-soft: rgba(110, 230, 140, 0.28);
+  --rim: #eaff9c;
+  --fill: linear-gradient(160deg, rgba(6, 64, 80, 0.9) 0%, rgba(11, 92, 72, 0.85) 58%, rgba(6, 78, 90, 0.87) 100%);
+}
+.ecard--blue {
+  --tone: #5aa8ff;
+  --tone-soft: rgba(80, 140, 255, 0.3);
+  --rim: #d4efff;
+  --fill: linear-gradient(160deg, rgba(8, 40, 92, 0.9) 0%, rgba(8, 70, 118, 0.85) 60%, rgba(25, 61, 123, 0.87) 100%);
+}
+.ecard.is-active { box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14), inset 0 0 24px color-mix(in srgb, var(--tone) 22%, transparent), 0 0 0 1px color-mix(in srgb, var(--tone) 60%, transparent), 0 0 22px var(--tone-soft); }
 .ecard__illus { width: 100%; max-width: 110px; height: auto; justify-self: center; }
 .ecard__title { font-size: 19px; line-height: 1.15; font-weight: 700; letter-spacing: -0.01em; }
-.ecard__desc { margin-top: 6px; font-size: 14px; line-height: 1.4; color: #e2e7f1; }
+.ecard__desc { margin-top: 6px; font-size: 14px; line-height: 1.4; color: #e8ecf4; }
 .ecard__go {
   position: absolute;
   right: 12px;
@@ -93,7 +125,7 @@
 .ecard__go img { width: 15px; height: auto; }
 .ecard__go:hover,
 .ecard__go:focus-visible { background: color-mix(in srgb, var(--tone) 30%, #08122c); box-shadow: 0 0 14px var(--tone-soft); }
-.ecard:has(.ecard__go:hover) { box-shadow: 0 0 0 1px var(--tone), 0 0 24px var(--tone-soft); }
+
 
 /* ---------- Stats ---------- */
 .exp__stats {
@@ -117,7 +149,10 @@
    Desktop composition — reference pixels
    ===================================================================== */
 @media (min-width: 1024px) {
-  .exp { height: calc(941 * var(--dp)); padding: 0; }
+  .exp { height: max(calc(941 * var(--dp)), calc(100vh)); padding: 0; }
+  /* Taller viewports: the waves continue below the composition as their own reflection. */
+  .exp__below { position: absolute; left: 0; right: 0; top: calc(941 * var(--dp)); --mirror-h: max(0px, calc(100vh - 941 * var(--dp))); }
+  .exp__below .plate-mirror { -webkit-mask-image: linear-gradient(180deg, #000, rgba(0, 0, 0, 0.6) 40%, transparent); mask-image: linear-gradient(180deg, #000, rgba(0, 0, 0, 0.6) 40%, transparent); }
   .exp .plate::after { display: none; }
   .exp__intro { position: absolute; inset: 0; padding: 0; pointer-events: none; }
   .exp__intro > * { pointer-events: auto; }
@@ -169,9 +204,43 @@
 
   .exp__diagram { position: absolute; inset: 0; margin: 0; padding: 0; }
   .exp__links { display: block; position: absolute; inset: 0; width: 100%; height: 100%; }
-  .exp__node { fill: #8ff0ff; filter: drop-shadow(0 0 4px #4fe3ff); }
-  .exp__node--green { fill: #b4ff7a; filter: drop-shadow(0 0 4px #8cff58); }
-  .exp__node--violet { fill: #c2a6ff; filter: drop-shadow(0 0 4px #a07bff); }
+  .exp__node { fill: #8ff0ff; transition: r var(--t-reveal) var(--ease); }
+  .exp__node--green { fill: #b4ff7a; }
+  .exp__node--violet { fill: #c2a6ff; }
+  .exp__node.is-active { r: 6; fill: #f4fff0; }
+  .exp__path { transition: opacity var(--t-reveal) var(--ease); }
+  /* One connection at a time: the others step back while one is lit. */
+  .exp__diagram[data-active] .exp__path:not(.is-active) { opacity: 0.32; }
+  .exp__lit-glow { fill: none; stroke: var(--lit, #7ff0ff); stroke-width: 5; stroke-linecap: round; opacity: 0.55; }
+  .exp__lit-line { fill: none; stroke: #f2fdff; stroke-width: 1.6; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+  .exp__lit-pulse {
+    fill: none;
+    stroke: #ffffff;
+    stroke-width: 3.2;
+    stroke-linecap: round;
+    stroke-dasharray: 9 200;
+    stroke-dashoffset: 9;
+    opacity: 0;
+  }
+  .exp__lit-end { fill: #f6fff2; opacity: 0; }
+  .exp__lit--green { --lit: #b8ff6a; }
+  .exp__lit--violet { --lit: #c3a2ff; }
+  .exp__lit--blue { --lit: #7fb6ff; }
+  .exp__lit-glow,
+  .exp__lit-line { stroke-dasharray: 100 100; stroke-dashoffset: 100; animation: exp-draw 0.55s cubic-bezier(0.3, 0, 0.2, 1) both; }
+  .exp__lit-pulse { animation: exp-pulse 0.9s cubic-bezier(0.45, 0, 0.3, 1) 0.15s both; }
+  .exp__lit-end { animation: exp-end 0.5s ease 0.75s both; }
+  .exp__core::after {
+    content: '';
+    position: absolute;
+    inset: 18% 22% 30%;
+    border-radius: 50%;
+    background: radial-gradient(closest-side, rgba(200, 255, 140, 0.22), transparent);
+    opacity: 0;
+    transition: opacity 0.6s var(--ease) 0.5s;
+    pointer-events: none;
+  }
+  .exp__diagram[data-active] .exp__core::after { opacity: 1; }
   .exp__core {
     position: absolute;
     left: calc(748 * var(--dp));
@@ -215,17 +284,22 @@
     font-size: max(10px, calc(11.6 * var(--dp)));
     line-height: calc(16.6 * var(--dp));
   }
+  /* The whole card is the link (as in the design: no separate arrow over the copy). */
   .ecard__go {
-    top: calc(9 * var(--dp));
-    right: calc(9 * var(--dp));
-    bottom: auto;
-    width: calc(22 * var(--dp));
-    height: calc(22 * var(--dp));
-    min-width: 22px;
-    min-height: 22px;
-    opacity: 0.8;
+    inset: 0;
+    width: auto;
+    height: auto;
+    border: 0;
+    border-radius: inherit;
+    background: transparent;
   }
-  .ecard__go img { width: calc(12 * var(--dp)); min-width: 11px; }
+  .ecard__go img { display: none; }
+  .ecard__go::before { display: none; }
+  .ecard__go:hover,
+  .ecard__go:focus-visible { background: transparent; box-shadow: none; }
+  .ecard__go:focus-visible { outline: 2px solid var(--focus); outline-offset: 4px; }
+  /* AutoCAD's longest line is wider than its card at the reference size. */
+  .ecard--cad .ecard__desc { letter-spacing: -0.012em; }
   .ecard__go:hover,
   .ecard__go:focus-visible { opacity: 1; }
 
@@ -269,4 +343,21 @@
   .exp-stat--e2e::before { left: 0; }
   .exp-stat--e2e .exp-stat__icon { left: calc((789 - 764) * var(--dp)); top: calc((831 - 816) * var(--dp)); height: calc(52 * var(--dp)); }
   .exp-stat--e2e > span { left: calc((842 - 764) * var(--dp)); top: calc((836 - 816) * var(--dp)); }
+}
+
+@keyframes exp-draw { to { stroke-dashoffset: 0; } }
+@keyframes exp-pulse {
+  0% { opacity: 0; stroke-dashoffset: 9; }
+  12% { opacity: 1; }
+  88% { opacity: 1; }
+  100% { opacity: 0; stroke-dashoffset: -100; }
+}
+@keyframes exp-end { from { opacity: 0; } to { opacity: 0.95; } }
+@media (prefers-reduced-motion: reduce) {
+  .exp__lit-pulse { display: none; }
+  .exp__core::after { transition: none; }
+  .exp__lit-glow,
+  .exp__lit-line,
+  .exp__lit-end { animation: none; stroke-dashoffset: 0; opacity: 1; }
+  .exp__lit-glow { opacity: 0.55; }
 }

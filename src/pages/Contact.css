@@ -153,11 +153,11 @@
   font-size: 17px;
   color: #0b1505;
   /* saturated lime pill, tight glow (the global primary halo is too broad here) */
-  background: linear-gradient(180deg, #ecff57 0%, #d8fb3a 45%, #b5ea1c 100%);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55), inset 0 -2px 4px rgba(70, 110, 0, 0.35), 0 0 10px rgba(205, 252, 70, 0.22);
+  background: linear-gradient(180deg, #efff5c 0%, #d6fa36 46%, #ace21a 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6), inset 0 -2px 4px rgba(70, 110, 0, 0.32);
 }
-.inquiry__submit:hover { filter: brightness(1.05); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55), inset 0 -2px 4px rgba(70, 110, 0, 0.35), 0 0 16px rgba(205, 252, 70, 0.35); }
-.inquiry__submit[disabled] { filter: saturate(0.6) brightness(0.9); cursor: progress; }
+.inquiry__submit:hover { background: linear-gradient(180deg, #f4ff7a 0%, #dcfc48 46%, #b4e924 100%); }
+.inquiry__submit[disabled] { opacity: 0.75; cursor: progress; }
 .inquiry__submit .btn__arrow { width: 26px; }
 .inquiry__notes { display: grid; }
 .inquiry__privacy { display: flex; gap: 12px; align-items: flex-start; font-size: 12.5px; line-height: 1.35; color: #dfe4ee; }
@@ -187,23 +187,85 @@
   .inquiry__foot { grid-template-columns: auto 1fr; align-items: center; column-gap: 28px; }
 }
 
+/* ---------- Motion around the active field and the primary action ---------- */
+/* Focus: the field's rim turns cyan → lime and one light passes along its lower edge; nothing
+   moves while the visitor types. */
+.inquiry .field__control::after {
+  content: '';
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  bottom: -1px;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, transparent, rgba(210, 255, 120, 0.95) 45%, rgba(120, 230, 255, 0.95) 55%, transparent);
+  background-size: 40% 100%;
+  background-repeat: no-repeat;
+  background-position: -60% 0;
+  opacity: 0;
+  pointer-events: none;
+}
+.inquiry .field__control:focus-within::after { animation: ct-field-pass 0.9s cubic-bezier(0.3, 0, 0.2, 1) 1 both; }
+@keyframes ct-field-pass {
+  0% { opacity: 0; background-position: -60% 0; }
+  15% { opacity: 1; }
+  100% { opacity: 0; background-position: 160% 0; }
+}
+.inquiry .input:focus {
+  --edge-a: #5fe2ff;
+  --edge-b: #d8ff5a;
+  box-shadow: 0 0 0 3px rgba(190, 255, 110, 0.16), inset 0 1px 0 rgba(130, 170, 230, 0.16);
+}
+
+/* Primary action: a crisp CSS surface (the supplied bitmap softened when enlarged); its halo is a
+   separate layer, and one sheen crosses it on hover/focus and when the form becomes complete. */
+.inquiry__submit {
+  overflow: hidden;
+  --glow: rgba(205, 252, 70, 0.5);
+  --glow-r: 14px;
+  --glow-o: 0.55;
+}
+.inquiry__submit::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, 0.55) 50%, transparent 65%);
+  background-size: 250% 100%;
+  background-position: 150% 0;
+  pointer-events: none;
+}
+.inquiry__submit > * { position: relative; z-index: 1; }
+.inquiry__submit:hover::before,
+.inquiry__submit:focus-visible::before,
+.inquiry[data-ready='true'] .inquiry__submit::before { animation: ct-sheen 0.9s cubic-bezier(0.3, 0, 0.2, 1) 1 both; }
+@keyframes ct-sheen {
+  from { background-position: 150% 0; }
+  to { background-position: -50% 0; }
+}
+/* The global :hover rule would restart the ready sheen; keep the button's own halo instead. */
+.inquiry__submit:hover { filter: none; }
+@media (prefers-reduced-motion: reduce) {
+  .inquiry .field__control::after,
+  .inquiry__submit::before { display: none; }
+}
+
 /* =====================================================================
-   Desktop composition — reference pixels (1 unit = 1/1199 of the width)
+   Desktop composition. The artwork (globe, ribbons) covers the scene in
+   reference pixels (--dp); the intro and the inquiry panel are interface
+   and use --t, so on a large monitor the form stays a comfortable size
+   and the globe and ribbons take the extra width.
    ===================================================================== */
 @media (min-width: 1024px) {
-  /* The fixed header stays visible. The contact section's origin is the header's lower edge: the
-     1199 × 613 reference frame starts there; the artwork covers the whole section, behind the
-     header too, and its lower ribbon sits on the bottom edge. */
+  .page--contact { --t-grow: 0.6; }
   .ct {
-    /* scene height below the header */
     --ct-h: max(calc(100vh - var(--hh)), calc(613 * var(--dp)));
     display: grid;
     align-items: start;
     min-height: calc(var(--hh) + var(--ct-h));
     padding: 0;
   }
-  /* The scene starts at the header's lower edge (the contact section's origin) and covers the
-     space below it at the source aspect; its lower ribbon sits on the bottom edge. */
   .ct-art {
     top: auto;
     bottom: 0;
@@ -216,137 +278,137 @@
     mask-image: none;
   }
 
-  /* Standalone composition: no visible header or reserved space. The full 1199 × 613 frame sits
-     at the reference positions; extra viewport height is shared above and below. If the form
-     grows (validation messages) the section grows with it and the artwork keeps covering. */
+  /* The panel sits 40px below the header at 1199 × 613 (07_Contact); in a taller scene the
+     extra height is shared 43 / 57 above and below the 521-unit composition. */
   .ct__layout {
     display: grid;
-    grid-template-columns: calc(465 * var(--dp)) calc(695 * var(--dp));
+    grid-template-columns: minmax(0, 1fr) calc(695 * var(--t));
     align-items: start;
     gap: 0;
-    padding: calc(var(--hh) + max(0px, (var(--ct-h) - 613 * var(--dp)) / 2)) 0 0;
+    padding: calc(var(--hh) + (var(--ct-h) - 521 * var(--t)) * 0.43) calc(39 * var(--dp)) calc(28 * var(--dp)) 0;
   }
 
-  /* Intro column — normal flow; margins land the reference anchors. */
-  .ct__intro { padding: calc(50 * var(--dp)) 0 0 calc(62 * var(--dp)); }
+  /* Intro column — normal flow from the design's anchor (62, 50) */
+  .ct__intro { padding: calc(10 * var(--t)) 0 0 max(calc(62 * var(--dp)), calc(50vw - 836px + 73px)); }
   .ct__eyebrow {
-    display: flex; /* the shared eyebrow is inline-flex; on a line strut it pushed the column down 6px */
-    height: calc(23 * var(--dp));
-    gap: calc(7 * var(--dp));
-    font-size: max(10px, calc(10.8 * var(--dp)));
+    display: flex;
+    height: calc(23 * var(--t));
+    gap: calc(7 * var(--t));
+    font-size: max(10.5px, calc(10.8 * var(--t)));
     letter-spacing: 0.18em;
     line-height: 1;
   }
-  .ct__eyebrow .eyebrow__flash { width: calc(32 * var(--dp)); height: auto; }
+  .ct__eyebrow .eyebrow__flash { width: calc(32 * var(--t)); height: auto; }
   .ct__title {
-    margin: calc(7.7 * var(--dp)) 0 0 calc(6 * var(--dp));
-    font-size: calc(44.3 * var(--dp));
-    line-height: calc(42.5 * var(--dp));
+    margin: calc(7.7 * var(--t)) 0 0 calc(6 * var(--t));
+    font-size: calc(44.3 * var(--t));
+    line-height: calc(42.5 * var(--t));
     letter-spacing: -0.006em;
     white-space: nowrap;
   }
-  /* The reference sets its second line tighter than the first. */
   .ct__title-l2 { letter-spacing: -0.034em; }
   .ct__title .t-lime { font-weight: 820; letter-spacing: 0.024em; }
   .ct__lead {
-    margin: calc(14.2 * var(--dp)) 0 0 calc(8 * var(--dp));
+    margin: calc(14.2 * var(--t)) 0 0 calc(8 * var(--t));
     max-width: none;
     white-space: nowrap;
-    font-size: max(12px, calc(14 * var(--dp)));
-    line-height: calc(18.5 * var(--dp));
+    font-size: max(13px, calc(14 * var(--t)));
+    line-height: calc(18.5 * var(--t));
   }
-  /* The reference sets the later lead lines slightly tighter than the first. */
   .ct__lead-l2 { letter-spacing: -0.015em; }
   .ct__lead-l3 { letter-spacing: -0.02em; }
-  .ct__methods { margin: calc(14.4 * var(--dp)) 0 0 calc(7 * var(--dp)); row-gap: calc(12.5 * var(--dp)); }
-  /* Row height comes from the two text lines, not the 43–44px icons (they overflow, centred). */
+  .ct__methods { margin: calc(14.4 * var(--t)) 0 0 calc(7 * var(--t)); row-gap: calc(12.5 * var(--t)); }
   .ct-method {
-    grid-template-columns: calc(54 * var(--dp)) auto;
-    grid-template-rows: calc(18.5 * var(--dp)) calc(18 * var(--dp));
-    column-gap: calc(17 * var(--dp));
+    grid-template-columns: calc(54 * var(--t)) auto;
+    grid-template-rows: calc(18.5 * var(--t)) calc(18 * var(--t));
+    column-gap: calc(17 * var(--t));
   }
-  .ct-method__icon { align-self: center; transform: translateY(calc(4 * var(--dp))); }
-  .ct-method__label { font-size: max(11.5px, calc(13.6 * var(--dp))); line-height: calc(18.5 * var(--dp)); white-space: nowrap; }
-  .ct-method__value { font-size: max(12px, calc(13 * var(--dp))); line-height: calc(18 * var(--dp)); white-space: nowrap; }
-  .ct-method--email .ct-method__icon { width: calc(43 * var(--dp)); }
-  .ct-method--slack .ct-method__icon { width: calc(44 * var(--dp)); }
-  .ct-method--location .ct-method__icon { width: calc(36 * var(--dp)); }
-  .ct-method--response .ct-method__icon { width: calc(43 * var(--dp)); }
+  .ct-method__icon { align-self: center; transform: translateY(calc(4 * var(--t))); }
+  .ct-method__label { font-size: max(12px, calc(13.6 * var(--t))); line-height: calc(18.5 * var(--t)); white-space: nowrap; }
+  .ct-method__value { font-size: max(12.5px, calc(13 * var(--t))); line-height: calc(18 * var(--t)); white-space: nowrap; }
+  .ct-method--email .ct-method__icon { width: calc(43 * var(--t)); }
+  .ct-method--slack .ct-method__icon { width: calc(44 * var(--t)); }
+  .ct-method--location .ct-method__icon { width: calc(36 * var(--t)); }
+  .ct-method--response .ct-method__icon { width: calc(43 * var(--t)); }
   .ct-method__icon { height: auto; }
 
-  /* Panel — the supplied glass panel (465,40 695×481) carries the rim lighting. */
+  /* Panel: the supplied glass panel carries the soft interior light; a crisp CSS rim (cyan
+     top-left → blue → violet right, lime catch along the bottom, sampled from 07_Contact) keeps the
+     fine edges sharp at any size. */
   .inquiry {
-    margin-top: calc(40 * var(--dp));
-    width: calc(695 * var(--dp));
-    min-height: calc(481 * var(--dp));
-    padding: calc(18 * var(--dp)) calc(32 * var(--dp)) calc(29 * var(--dp)) calc(40 * var(--dp));
-    border-radius: calc(20 * var(--dp));
+    width: calc(695 * var(--t));
+    min-height: calc(481 * var(--t));
+    padding: calc(18 * var(--t)) calc(32 * var(--t)) calc(29 * var(--t)) calc(40 * var(--t));
+    border-radius: calc(20 * var(--t));
     background: var(--panel-art) 0 0 / 100% 100% no-repeat, #09193a;
-    box-shadow: none;
+    box-shadow: 0 30px 60px rgba(0, 4, 16, 0.35);
   }
-  .inquiry::before { display: none; }
+  .inquiry::before {
+    display: block;
+    padding: 1px;
+    background:
+      linear-gradient(180deg, transparent 72%, rgba(170, 245, 80, 0.55) 100%),
+      linear-gradient(115deg, #5fe0ff 0%, #3f8ff0 22%, rgba(70, 120, 230, 0.55) 48%, #6f55e8 76%, #c27cff 100%);
+  }
 
-  .inquiry__head { height: calc(36 * var(--dp)); flex-wrap: nowrap; }
-  .inquiry__title { margin-left: calc(-7 * var(--dp)); gap: calc(8 * var(--dp)); font-size: calc(22 * var(--dp)); line-height: calc(36 * var(--dp)); }
-  .inquiry__plane { width: calc(40 * var(--dp)); }
-  .inquiry__sub { margin-right: calc(4 * var(--dp)); font-size: max(11.5px, calc(13.4 * var(--dp))); line-height: 1; }
+  .inquiry__head { height: calc(36 * var(--t)); flex-wrap: nowrap; }
+  .inquiry__title { margin-left: calc(-7 * var(--t)); gap: calc(8 * var(--t)); font-size: calc(22 * var(--t)); line-height: calc(36 * var(--t)); }
+  .inquiry__plane { width: calc(40 * var(--t)); }
+  .inquiry__sub { margin-right: calc(4 * var(--t)); font-size: max(12px, calc(13.4 * var(--t))); line-height: 1; }
 
   .inquiry__grid {
-    margin-top: calc(11 * var(--dp));
-    grid-template-columns: calc(301 * var(--dp)) calc(298 * var(--dp));
-    column-gap: calc(24 * var(--dp));
-    row-gap: calc(13 * var(--dp));
+    margin-top: calc(11 * var(--t));
+    grid-template-columns: minmax(0, 301fr) minmax(0, 298fr);
+    column-gap: calc(24 * var(--t));
+    row-gap: calc(13 * var(--t));
   }
-  .inquiry .field { gap: calc(4 * var(--dp)); }
-  .inquiry .field__label { font-size: max(11px, calc(11.7 * var(--dp))); line-height: calc(14 * var(--dp)); }
-  .f-details { margin-top: calc(4 * var(--dp)); }
+  .inquiry .field { gap: calc(4 * var(--t)); }
+  .inquiry .field__label { font-size: max(12px, calc(11.7 * var(--t))); line-height: calc(14 * var(--t)); }
+  .f-details { margin-top: calc(4 * var(--t)); }
   .inquiry .input {
     min-height: 0;
-    height: calc(34 * var(--dp));
-    padding: 0 calc(12 * var(--dp)) 0 calc(40.5 * var(--dp));
-    border-radius: calc(7 * var(--dp));
-    font-size: max(11.5px, calc(11.8 * var(--dp)));
+    height: calc(34 * var(--t));
+    padding: 0 calc(12 * var(--t)) 0 calc(40.5 * var(--t));
+    border-radius: calc(7 * var(--t));
+    font-size: max(12.5px, calc(11.8 * var(--t)));
   }
-  .inquiry select.input { padding-right: calc(36 * var(--dp)); }
+  .inquiry select.input { padding-right: calc(36 * var(--t)); }
   .inquiry textarea.input {
-    height: calc(99 * var(--dp));
-    padding-top: calc(9 * var(--dp));
-    line-height: calc(19 * var(--dp));
+    height: calc(99 * var(--t));
+    padding-top: calc(9 * var(--t));
+    line-height: calc(19 * var(--t));
     resize: none;
   }
-  .inquiry .field__icon { left: calc(8 * var(--dp)); height: auto; }
-  .f-name .field__icon { width: calc(24 * var(--dp)); }
-  .f-email .field__icon { left: calc(7 * var(--dp)); width: calc(29 * var(--dp)); }
-  .f-company .field__icon { left: calc(9 * var(--dp)); width: calc(26 * var(--dp)); }
-  .f-type .field__icon { left: calc(7 * var(--dp)); width: calc(30 * var(--dp)); }
-  .f-budget .field__icon { left: calc(9 * var(--dp)); width: calc(31 * var(--dp)); }
-  .f-details .field__icon { left: calc(11 * var(--dp)); top: calc(3 * var(--dp)); width: calc(31 * var(--dp)); }
-  .inquiry .field__chevron { right: calc(7 * var(--dp)); }
-  .f-budget .field__chevron { width: calc(22 * var(--dp)); }
-  .f-type .field__chevron { width: calc(25 * var(--dp)); }
-  .inquiry__counter { right: calc(12 * var(--dp)); bottom: calc(8 * var(--dp)); font-size: max(10.5px, calc(11.4 * var(--dp))); }
-  .inquiry .field__error { font-size: max(11.5px, calc(12.4 * var(--dp))); }
+  .inquiry .field__icon { left: calc(8 * var(--t)); height: auto; }
+  .f-name .field__icon { width: calc(24 * var(--t)); }
+  .f-email .field__icon { left: calc(7 * var(--t)); width: calc(29 * var(--t)); }
+  .f-company .field__icon { left: calc(9 * var(--t)); width: calc(26 * var(--t)); }
+  .f-type .field__icon { left: calc(7 * var(--t)); width: calc(30 * var(--t)); }
+  .f-budget .field__icon { left: calc(9 * var(--t)); width: calc(31 * var(--t)); }
+  .f-details .field__icon { left: calc(11 * var(--t)); top: calc(3 * var(--t)); width: calc(31 * var(--t)); }
+  .inquiry .field__chevron { right: calc(7 * var(--t)); }
+  .f-budget .field__chevron { width: calc(22 * var(--t)); }
+  .f-type .field__chevron { width: calc(25 * var(--t)); }
+  .inquiry__counter { right: calc(12 * var(--t)); bottom: calc(8 * var(--t)); font-size: max(11px, calc(11.4 * var(--t))); }
+  .inquiry .field__error { font-size: max(12px, calc(12.4 * var(--t))); }
 
   .inquiry__foot {
-    margin-top: calc(24 * var(--dp));
-    grid-template-columns: calc(285 * var(--dp)) auto;
-    column-gap: calc(35 * var(--dp));
+    margin-top: calc(24 * var(--t));
+    grid-template-columns: calc(285 * var(--t)) auto;
+    column-gap: calc(35 * var(--t));
     align-items: start;
   }
   .inquiry__submit {
-    --btn-h: calc(47 * var(--dp));
-    min-height: max(40px, calc(47 * var(--dp)));
-    width: calc(285 * var(--dp));
-    margin-left: calc(3 * var(--dp));
+    --btn-h: calc(47 * var(--t));
+    min-height: max(40px, calc(47 * var(--t)));
+    width: calc(285 * var(--t));
+    margin-left: calc(3 * var(--t));
     padding: 0;
-    gap: calc(14 * var(--dp));
-    font-size: max(14px, calc(17.4 * var(--dp)));
-    background: var(--submit-art) 0 0 / 100% 100% no-repeat;
-    box-shadow: 0 0 8px rgba(205, 252, 70, 0.18);
+    gap: calc(14 * var(--t));
+    font-size: max(14px, calc(17.4 * var(--t)));
   }
-  .inquiry__submit:hover { box-shadow: 0 0 14px rgba(205, 252, 70, 0.32); }
-  .inquiry__submit .btn__arrow { width: calc(28 * var(--dp)); }
-  .inquiry__notes { padding-top: calc(5 * var(--dp)); }
-  .inquiry__privacy { gap: calc(5 * var(--dp)); font-size: max(10.5px, calc(12 * var(--dp))); line-height: calc(16 * var(--dp)); white-space: nowrap; }
-  .inquiry__lock { width: calc(31 * var(--dp)); margin-top: calc(-1 * var(--dp)); }
+  .inquiry__submit .btn__arrow { width: calc(28 * var(--t)); }
+  .inquiry__notes { padding-top: calc(5 * var(--t)); }
+  .inquiry__privacy { gap: calc(5 * var(--t)); font-size: max(11.5px, calc(12 * var(--t))); line-height: calc(16 * var(--t)); white-space: nowrap; }
+  .inquiry__lock { width: calc(31 * var(--t)); margin-top: calc(-1 * var(--t)); }
 }

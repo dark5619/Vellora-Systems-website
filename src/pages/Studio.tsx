@@ -1,4 +1,4 @@
-import { Plate } from '../components/Plate';
+import { Plate, PlateMirror } from '../components/Plate';
 import { RibbonEdge } from '../components/RibbonEdge';
 import { ButtonLink, Eyebrow, Glyph, Img, JumpLink } from '../components/primitives';
 import { FACTS } from '../data/site';
@@ -121,6 +121,7 @@ export function StudioPage() {
       </section>
 
       <section id="team" className="col st-team" aria-labelledby="st-team-title" tabIndex={-1}>
+        <PlateMirror k="05-Studio/backgrounds/studio-hero" className="st-team__mirror" />
         <h2 id="st-team-title" className="st-kicker">
           <Glyph k="Shared-Icons/studio/section-flash" className="st-kicker__flash" />
           Key Members

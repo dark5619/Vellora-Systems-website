@@ -309,7 +309,8 @@ async function contactLayout(browser) {
       check('Email-draft note is not part of the resting layout', !m.handoffVisible);
     }
     if (w === 1624) {
-      check('1624×908: intro ≈6%, panel ≈39%–97%', Math.abs(m.intro - 6) < 1 && Math.abs(m.panelL - 39) < 1 && Math.abs(m.panelR - 97) < 1, `${m.intro}% / ${m.panelL}% – ${m.panelR}%`);
+      // Wider than the design: the form keeps a comfortable size (--t) while the art takes the width.
+      check('1624×908: intro ≈6%, panel ends ≈97% and spans 50–58% of the width', Math.abs(m.intro - 6) < 1 && Math.abs(m.panelR - 97) < 1 && m.panelR - m.panelL >= 50 && m.panelR - m.panelL <= 58, `${m.intro}% / ${m.panelL}% – ${m.panelR}%`);
     }
   }
   // Validation messages grow the form; the lower ribbon stays on the bottom edge.
@@ -335,7 +336,7 @@ async function aboutWide(browser) {
     page.evaluate(() => {
       const r = (s) => document.querySelector(s).getBoundingClientRect();
       const vw = innerWidth;
-      const fills = [...document.querySelectorAll('.plate__fill')].filter((e) => getComputedStyle(e).display !== 'none').length;
+      const dp = vw / 1199;
       return {
         sw: document.documentElement.scrollWidth - vw,
         heading: Math.round(r('.ab-title').left),
@@ -344,8 +345,10 @@ async function aboutWide(browser) {
         statsPct: Math.round((r('.ab-stats').width / vw) * 100),
         grid: [Math.round(r('.ab-ind__grid').left), Math.round(r('.ab-ind__grid').right)],
         gridPct: Math.round((r('.ab-ind__grid').width / vw) * 100),
-        plate: [Math.round(r('.ab-hero .plate__img').left), Math.round(r('.ab-hero .plate__img').right)],
-        fills,
+        plate: [Math.round(r('.ab-art__img').left), Math.round(r('.ab-art__img').right)],
+        artH: Math.round(r('.ab-art__img').height),
+        // gap between the copy's right edge and the V's left tip (x = 490 on the art)
+        copyToV: Math.round(490 * dp - Math.max(...[...document.querySelectorAll('.ab-copy p')].map((p) => { const g = document.createRange(); g.selectNodeContents(p); return g.getBoundingClientRect().right; }))),
       };
     });
   await page.setViewport({ width: 1199, height: 711 });
@@ -359,9 +362,8 @@ async function aboutWide(browser) {
   a = await m();
   check('1728×991: heading near the left gutter (≈5%)', a.headingPct < 6, `${a.heading}px (${a.headingPct}%)`);
   check('1728×991: metrics strip ≈78% and industry grid ≈91% of the width', a.statsPct >= 75 && a.gridPct >= 88, `strip ${a.statsPct}%, grid ${a.gridPct}%`);
-  check('1728×991: office plate reaches both edges with no blurred extension', a.plate[0] <= 0 && a.plate[1] >= 1728 && a.fills === 0 && a.sw <= 0, JSON.stringify(a.plate));
-  const fs = await page.$eval('.ab-title', (h) => parseFloat(getComputedStyle(h).fontSize));
-  check('1728×991: heading keeps its natural size', Math.abs(fs - 45) < 0.5, `${fs}px`);
+  check('1728×991: office art reaches both edges, one layer through the ribbon band (no cut)', a.plate[0] <= 0 && a.plate[1] >= 1728 && a.artH >= Math.round(676 * 1728 / 1199) - 1 && a.sw <= 0, JSON.stringify(a));
+  check('1728×991: the V meets the copy (copy ends within 60px of the V)', a.copyToV >= -12 && a.copyToV <= 60, `${a.copyToV}px`);
   await page.setViewport({ width: 390, height: 844, isMobile: true, hasTouch: true });
   await page.goto(BASE + '/about', { waitUntil: 'networkidle0' });
   a = await page.evaluate(() => ({ sw: document.documentElement.scrollWidth - innerWidth, clipped: [...document.querySelectorAll('.ab-stat, .icard')].filter((e) => { const b = e.getBoundingClientRect(); return b.right > innerWidth + 1 || b.left < -1; }).length }));
@@ -416,6 +418,8 @@ async function heroAndMotion(browser) {
   await page.waitForFunction(() => document.querySelector('[data-hero-mode]')?.getAttribute('data-hero-mode') !== 'loading', { timeout: 10000 });
   const mode = await page.$eval('[data-hero-mode]', (e) => e.getAttribute('data-hero-mode'));
   check('WebGL scene swaps in on a fine pointer', mode === 'webgl', mode);
+  // The orbit light passes periodically; measure the resting pose between passes.
+  await page.waitForFunction(() => +(document.querySelector('[data-hero-mode]')?.dataset.heroLightRuns ?? 0) >= 1, { timeout: 15000 }).catch(() => {});
   // Artwork-only region: right of the headline, below the header, above the cards' glow.
   const clip = { x: 830, y: 95, width: 770, height: 440 };
   await page.mouse.move(5, 900);

@@ -5,7 +5,7 @@ import { SelectField, TextAreaField, TextField } from '../components/Form';
 import { Eyebrow, Glyph } from '../components/primitives';
 import { BUDGETS, CONTACT, PROJECT_TYPES } from '../data/site';
 import { usePageTitle } from '../hooks/usePageTitle';
-import { asset, srcSet } from '../lib/assets';
+import { asset, avifSet, srcSet } from '../lib/assets';
 import {
   DETAILS_MAX,
   EMPTY,
@@ -110,6 +110,8 @@ export function ContactPage() {
   }
 
   const remaining = values.details.length;
+  // Every required field valid: the primary action gets one sheen (CSS) to show it is ready.
+  const ready = useMemo(() => Object.keys(validate(values)).length === 0, [values]);
   const handoffNote =
     delivery.kind === 'email'
       ? `Opens an email draft to ${delivery.address} in your mail app. Nothing is sent until you press Send.`
@@ -117,7 +119,6 @@ export function ContactPage() {
   const backdrop = asset('07-Contact/backgrounds/globe-and-ribbons-backdrop');
   const artVars = {
     '--panel-art': `url(${asset('07-Contact/backgrounds/inquiry-glass-panel').src})`,
-    '--submit-art': `url(${asset('Shared-UI/surfaces/contact-submit').src})`,
   } as CSSProperties;
 
   return (
@@ -127,17 +128,20 @@ export function ContactPage() {
             backdrop already contains the globe and both ribbons; the rigs use derived backings
             that equal the backdrop outside each light strip, so every feature renders once. */}
         <div className="ct-art decor" aria-hidden="true">
-          <img
-            className="ct-art__backdrop"
-            src={backdrop.src}
-            srcSet={srcSet('07-Contact/backgrounds/globe-and-ribbons-backdrop')}
-            sizes="(min-width: 1024px) 160vw, 1200px"
-            width={backdrop.w}
-            height={backdrop.h}
-            alt=""
-            decoding="sync"
-            {...{ fetchpriority: 'high' }}
-          />
+          <picture>
+            <source type="image/avif" srcSet={avifSet('07-Contact/backgrounds/globe-and-ribbons-backdrop')} sizes="(min-width: 1024px) 160vw, 1200px" />
+            <img
+              className="ct-art__backdrop"
+              src={backdrop.src}
+              srcSet={srcSet('07-Contact/backgrounds/globe-and-ribbons-backdrop')}
+              sizes="(min-width: 1024px) 160vw, 1200px"
+              width={backdrop.w}
+              height={backdrop.h}
+              alt=""
+              decoding="sync"
+              {...{ fetchpriority: 'high' }}
+            />
+          </picture>
           <RibbonEdge
             base="07-Contact/motion-ribbons/top-edge/01-base-clean"
             strip="07-Contact/motion-ribbons/top-edge/02-ribbon"
@@ -192,7 +196,7 @@ export function ContactPage() {
             </ul>
           </div>
 
-          <form className="inquiry" noValidate onSubmit={onSubmit} aria-labelledby="inquiry-title">
+          <form className="inquiry" noValidate onSubmit={onSubmit} aria-labelledby="inquiry-title" data-ready={ready ? 'true' : 'false'}>
             <div className="inquiry__head">
               <h2 id="inquiry-title" className="inquiry__title">
                 <Glyph k="Shared-Icons/contact/send-plane" className="inquiry__plane" />

@@ -2,7 +2,7 @@ import { forwardRef, useMemo, type CSSProperties, type MouseEvent } from 'react'
 import { Link } from 'react-router-dom';
 import { MEDIA_ASPECT, type Project } from '../data/projects';
 import { layoutMedia } from '../lib/artDirection';
-import { asset } from '../lib/assets';
+import { asset, avifSet } from '../lib/assets';
 import { ArrowGlyph, Glyph } from './primitives';
 
 export function ProjectMedia({
@@ -22,29 +22,44 @@ export function ProjectMedia({
   const art = asset(project.media.art);
   const obj = asset(project.media.object);
   const loading = eager ? 'eager' : 'lazy';
+  // Desktop cards are about a third of the viewport; the dialog and phones draw them wider.
+  // The hint favours the 2× derivative wherever the frame is larger than the 1× crop.
+  const sizes = '(min-width: 1024px) 36vw, (min-width: 640px) 50vw, 100vw';
+  const artAvif = avifSet(project.media.art);
+  const objAvif = avifSet(project.media.object);
   return (
     <div className={`pmedia ${className}`} style={{ aspectRatio: String(aspect) }}>
       <div className="pmedia__stage" style={layout.stage}>
-        <img className="pmedia__art" src={art.src} width={art.w} height={art.h} alt="" loading={loading} decoding="async" draggable={false} />
-        <img
-          className="pmedia__object"
-          src={obj.src}
-          width={obj.w}
-          height={obj.h}
-          alt={decorative ? '' : project.media.alt}
-          loading={loading}
-          decoding="async"
-          draggable={false}
-          style={
-            {
-              left: layout.object.left,
-              top: layout.object.top,
-              width: layout.object.width,
-              transformOrigin: layout.object.transformOrigin,
-              '--k': layout.object.scale,
-            } as CSSProperties
-          }
-        />
+        <picture>
+          {artAvif && <source type="image/avif" srcSet={artAvif} sizes={sizes} />}
+          <img className="pmedia__art" src={art.src} width={art.w} height={art.h} alt="" loading={loading} decoding="async" draggable={false} />
+        </picture>
+        <picture>
+          {objAvif && <source type="image/avif" srcSet={objAvif} sizes={sizes} />}
+          <img
+            className="pmedia__object"
+            src={obj.src}
+            width={obj.w}
+            height={obj.h}
+            alt={decorative ? '' : project.media.alt}
+            loading={loading}
+            decoding="async"
+            draggable={false}
+            style={
+              {
+                left: layout.object.left,
+                top: layout.object.top,
+                width: layout.object.width,
+                '--k': layout.object.scale,
+                '--ox': layout.object.ox,
+                '--oy': layout.object.oy,
+                '--dx': layout.object.dx,
+                '--dy': layout.object.dy,
+                '--h-hover': layout.object.hover,
+              } as CSSProperties
+            }
+          />
+        </picture>
       </div>
     </div>
   );

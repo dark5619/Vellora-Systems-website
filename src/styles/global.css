@@ -95,6 +95,8 @@ body {
   body { overflow-x: clip; }
 }
 img { display: block; max-width: 100%; height: auto; }
+/* Format/density wrapper only (AVIF + WebP fallback): layout sees the <img>. */
+picture { display: contents; }
 h1, h2, h3, h4, p, ul, ol, figure, dl, dd { margin: 0; }
 :where(ul[role='list'], ol[role='list']) { list-style: none; padding: 0; margin: 0; }
 a { color: inherit; text-decoration: none; }
@@ -139,6 +141,9 @@ main {
   container-name: main;
 }
 main:focus { outline: none; }
+/* Route changes move focus to the page heading for screen readers; the heading is not a control,
+   so it needs no ring drawn over the artwork. */
+main h1[tabindex='-1']:focus { outline: none; }
 
 /* Each page declares its reference width; --dp is one reference pixel, capped at 1px. */
 .page {
@@ -146,6 +151,11 @@ main:focus { outline: none; }
   /* One reference pixel. Compositions follow the viewport width in both directions, so wide
      screens get full-width artwork instead of a centred reference-width column. */
   --dp: calc(100cqw / var(--design-w));
+  /* Type and control unit. Equal to --dp up to the reference width; wider than that it grows at
+     a fraction of the artwork's rate (--t-grow), so copy keeps a comfortable size and measure on
+     large monitors while artwork and product screens take the extra width. */
+  --t-grow: 0.6;
+  --t: min(var(--dp), calc(1px + (var(--dp) - 1px) * var(--t-grow)), 1.6px);
   position: relative;
   isolation: isolate;
 }
@@ -189,6 +199,8 @@ main:focus { outline: none; }
 ------------------------------------------------------------------- */
 .btn {
   --btn-h: 48px;
+  position: relative;
+  isolation: isolate;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -205,30 +217,49 @@ main:focus { outline: none; }
     box-shadow var(--t-control) var(--ease),
     background-color var(--t-control) var(--ease),
     border-color var(--t-control) var(--ease),
-    filter var(--t-control) var(--ease),
     transform var(--t-control) var(--ease);
 }
+/* Glow lives on its own decorative layer outside the control, so the label, arrow and border
+   are never blurred or brightened; hover/focus only raises that layer's opacity. */
+.btn::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow: 0 0 var(--glow-r, 16px) var(--glow, transparent);
+  opacity: var(--glow-o, 0.6);
+  transition: opacity var(--t-control) var(--ease);
+}
+.btn:hover::after,
+.btn:focus-visible::after { opacity: 1; }
 .btn__icon { width: 1.25em; height: auto; flex: none; }
 .btn__arrow { width: 1.1em; height: 1.1em; flex: none; }
 
 .btn--primary {
+  --glow: rgba(205, 252, 70, 0.55);
+  --glow-r: 18px;
+  --glow-o: 0.7;
   color: var(--accent-ink);
-  background: linear-gradient(180deg, #ecff86 0%, #d4fc4d 42%, #b4e926 100%);
+  background: linear-gradient(180deg, #f0ff92 0%, #d8fd50 40%, #b5ec1f 100%);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.6),
-    inset 0 -2px 6px rgba(80, 120, 0, 0.35),
-    0 0 18px rgba(205, 252, 70, 0.42);
+    inset 0 1px 0 rgba(255, 255, 255, 0.7),
+    inset 0 -2px 5px rgba(70, 110, 0, 0.32);
 }
-.btn--primary:hover { filter: brightness(1.06); box-shadow: inset 0 1px 0 rgba(255,255,255,.6), inset 0 -2px 6px rgba(80,120,0,.35), 0 0 28px rgba(205, 252, 70, 0.62); }
+.btn--primary:hover { background: linear-gradient(180deg, #f6ffad 0%, #e0ff66 40%, #c0f22e 100%); }
 .btn--primary:active { transform: translateY(1px); }
 
 .btn--outline {
+  --glow: rgba(205, 252, 70, 0.4);
+  --glow-r: 12px;
+  --glow-o: 0.55;
   color: var(--text);
   border-color: var(--accent);
   background: rgba(8, 18, 34, 0.35);
-  box-shadow: 0 0 14px rgba(205, 252, 70, 0.32), inset 0 0 10px rgba(205, 252, 70, 0.12);
+  box-shadow: inset 0 0 10px rgba(205, 252, 70, 0.1);
 }
-.btn--outline:hover { box-shadow: 0 0 22px rgba(205, 252, 70, 0.55), inset 0 0 12px rgba(205, 252, 70, 0.2); background: rgba(205, 252, 70, 0.08); }
+.btn--outline:hover { background: rgba(205, 252, 70, 0.08); }
 
 .btn--ghost {
   color: var(--text);
@@ -517,17 +548,6 @@ html { scroll-padding-top: calc(var(--hh) + 12px); }
   z-index: -1;
   background: var(--canvas-deep);
 }
-.plate__fill {
-  display: none;
-  position: absolute;
-  inset: -48px;
-  width: calc(100% + 96px);
-  max-width: none;
-  height: calc(100% + 96px);
-  object-fit: cover;
-  filter: blur(26px) saturate(1.08);
-  transform: translateZ(0);
-}
 .plate__img {
   position: absolute;
   inset: 0;
@@ -537,14 +557,40 @@ html { scroll-padding-top: calc(var(--hh) + 12px); }
   object-fit: cover;
   object-position: var(--focus);
 }
-/* Desktop composition: the plate is laid out in reference pixels from the top. */
+/* Desktop composition: the plate is laid out in reference pixels from the top, centred by
+   layout. (A translateX(-50%) centre put the 1199px plates on a half pixel at their native
+   width, which resampled every texel and softened neon edges and wall lettering.) */
 @media (min-width: 1024px) {
   .plate__img {
-    inset: 0 auto auto 50%;
+    inset: 0 0 auto 0;
+    margin-inline: auto;
     width: calc(var(--pw) * var(--dp));
     height: auto;
-    transform: translateX(-50%);
     object-fit: fill;
+  }
+}
+/* Mirrored continuation under a plate (see PlateMirror): desktop only. */
+.plate-mirror { display: none; }
+@media (min-width: 1024px) {
+  .plate-mirror {
+    display: block;
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: var(--mirror-h, calc(64 * var(--dp)));
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+    -webkit-mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.35) 45%, transparent);
+    mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.35) 45%, transparent);
+  }
+  .plate-mirror__img {
+    position: absolute;
+    inset: 0 0 auto 0;
+    margin-inline: auto;
+    width: calc(var(--pw) * var(--dp));
+    max-width: none;
+    height: auto;
+    transform: scaleY(-1);
   }
 }
 /* Shared content column for 1199px-reference pages. */
@@ -579,31 +625,45 @@ html { scroll-padding-top: calc(var(--hh) + 12px); }
 /* ------------------------------------------------------------------
    Project card (shared by Work and previews)
 ------------------------------------------------------------------- */
+/* Colours sampled from 02_Our_Work: each card keeps its own neon rim (bright where the scene's
+   light reaches it) and a body tinted by its project, lighter in the second row. */
 .pcard {
   min-width: 0;
-  --edge: rgba(212, 252, 77, 0.85);
-  --edge-soft: rgba(212, 252, 77, 0.28);
+  --edge: #c9f53a;
+  --edge-2: #42a9d9;
+  --edge-soft: rgba(212, 252, 77, 0.26);
+  --fill-top: #071d31;
+  --fill-bot: #071c2e;
   position: relative;
   display: flex;
   flex-direction: column;
   border-radius: 22px;
   padding: 3px;
   background:
-    linear-gradient(var(--card-fill, #071631), var(--card-fill, #071631)) padding-box,
-    linear-gradient(155deg, var(--edge) 0%, var(--edge-soft) 38%, rgba(70, 110, 200, 0.35) 62%, var(--edge) 100%) border-box;
+    linear-gradient(180deg, var(--fill-top), var(--fill-bot)) padding-box,
+    linear-gradient(160deg, var(--edge-2) 0%, color-mix(in srgb, var(--edge-2) 45%, transparent) 34%, color-mix(in srgb, var(--edge) 30%, transparent) 62%, var(--edge) 100%) border-box;
   border: 1.5px solid transparent;
-  box-shadow: 0 0 0 0 transparent, 0 0 16px var(--edge-soft);
-  transition: box-shadow var(--t-control) var(--ease), filter var(--t-control) var(--ease);
+  isolation: isolate;
 }
-.pcard[data-accent='violet'] { --edge: rgba(176, 108, 255, 0.95); --edge-soft: rgba(150, 90, 255, 0.32); --card-fill: #0b1032; }
-.pcard[data-accent='teal'] { --edge: rgba(80, 230, 220, 0.9); --edge-soft: rgba(60, 200, 210, 0.28); --card-fill: #04192e; }
-.pcard[data-accent='indigo'] { --edge: rgba(140, 120, 255, 0.9); --edge-soft: rgba(110, 90, 255, 0.3); --card-fill: #0a1236; }
-.pcard[data-accent='blue'] { --edge: rgba(90, 170, 255, 0.92); --edge-soft: rgba(70, 140, 255, 0.3); --card-fill: #05182f; }
-.pcard[data-accent='lime'] { --card-fill: #061630; }
-.pcard:hover,
-.pcard:focus-within {
-  box-shadow: 0 0 0 1px var(--edge), 0 0 30px var(--edge-soft), 0 0 60px var(--edge-soft);
+/* Resting halo is faint; only the card in use lights up (separate layer: text stays crisp). */
+.pcard::after {
+  content: '';
+  position: absolute;
+  inset: -1.5px;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--edge) 70%, transparent), 0 0 26px var(--edge-soft);
+  opacity: 0;
+  transition: opacity var(--t-reveal) var(--ease);
 }
+.pcard:hover::after,
+.pcard:focus-within::after { opacity: 1; }
+.pcard[data-project='tv-streaming'] { --edge: #9c6bff; --edge-2: #d4c5f3; --edge-soft: rgba(150, 90, 255, 0.3); --fill-top: #0b1334; --fill-bot: #0d1539; }
+.pcard[data-project='healthcare-web'] { --edge: #4fe0e6; --edge-2: #b2dff4; --edge-soft: rgba(60, 200, 220, 0.26); --fill-top: #042036; --fill-bot: #03293a; }
+.pcard[data-project='fintech-dashboard'] { --edge: #6f78ff; --edge-2: #3a63c8; --edge-soft: rgba(110, 100, 255, 0.28); --fill-top: #13244f; --fill-bot: #0e1a43; }
+.pcard[data-project='pcb-design'] { --edge: #b6ef3a; --edge-2: #78b9b8; --edge-soft: rgba(190, 240, 70, 0.24); --fill-top: #162f45; --fill-bot: #112b30; }
+.pcard[data-project='robotics-automation'] { --edge: #38baf5; --edge-2: #92c4e0; --edge-soft: rgba(60, 170, 255, 0.28); --fill-top: #142f57; --fill-bot: #0d284d; }
 
 .pmedia {
   position: relative;
@@ -615,24 +675,28 @@ html { scroll-padding-top: calc(var(--hh) + 12px); }
 }
 .pmedia__stage { position: absolute; }
 .pmedia__art { position: absolute; inset: 0; width: 100%; height: 100%; }
+/* The isolated device sits exactly over its baked counterpart. Its resting enlargement (--k
+   about --ox/--oy) and the hover approach (--h about the detail point --dx/--dy) are composed
+   in one transform, so the screen or component the visitor came to see moves toward them while
+   the scenery stays put. */
 .pmedia__object {
   position: absolute;
   max-width: none;
-  transform: scale(var(--k, 1));
-  transition: transform var(--t-reveal) var(--ease), filter var(--t-control) var(--ease);
+  transform-origin: 0 0;
+  transform:
+    translate(var(--dx, 50%), var(--dy, 50%)) scale(var(--h, 1)) translate(calc(-1 * var(--dx, 50%)), calc(-1 * var(--dy, 50%)))
+    translate(var(--ox, 50%), var(--oy, 50%)) scale(var(--k, 1)) translate(calc(-1 * var(--ox, 50%)), calc(-1 * var(--oy, 50%)));
+  transition: transform 560ms cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 .pcard:hover .pmedia__object,
-.pcard:focus-within .pmedia__object {
-  transform: scale(calc(var(--k, 1) * 1.022));
-  filter: brightness(1.07) drop-shadow(0 6px 14px rgba(0, 0, 0, 0.35));
-}
+.pcard:focus-within .pmedia__object { --h: var(--h-hover, 1.075); }
 .pmedia::after {
   /* quiet lower edge where the caption begins */
   content: '';
   position: absolute;
   inset: auto 0 0 0;
-  height: 22%;
-  background: linear-gradient(180deg, transparent, var(--card-fill, #071631));
+  height: 12%;
+  background: linear-gradient(180deg, transparent, var(--fill-top));
   pointer-events: none;
 }
 
@@ -698,10 +762,13 @@ html { scroll-padding-top: calc(var(--hh) + 12px); }
 .pcard__actions { margin-top: auto; padding-top: 18px; }
 .pcard__cta {
   --btn-h: 36px;
+  --glow: var(--edge-soft);
+  --glow-r: 10px;
+  --glow-o: 0.5;
   font-size: 14px;
   padding-inline: 18px 16px;
   border-color: var(--edge);
-  box-shadow: 0 0 12px var(--edge-soft), inset 0 0 8px var(--edge-soft);
+  box-shadow: inset 0 0 8px color-mix(in srgb, var(--edge) 18%, transparent);
 }
 .pcard__cta:hover { background: color-mix(in srgb, var(--edge) 12%, transparent); }
 
@@ -846,7 +913,7 @@ textarea.input { min-height: 132px; resize: vertical; padding-top: 13px; line-he
   }
   .ribbon__strip { animation: none; transform: none; }
   .pcard:hover .pmedia__object,
-  .pcard:focus-within .pmedia__object { transform: scale(var(--k, 1)); }
+  .pcard:focus-within .pmedia__object { --h: 1; }
 }
 
 /* ------------------------------------------------------------------

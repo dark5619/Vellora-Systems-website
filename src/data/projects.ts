@@ -40,6 +40,13 @@ export interface MediaDirection {
   anchorBottom?: boolean;
   objectScale?: number;
   objectOrigin?: [number, number];
+  /**
+   * The product detail worth seeing (object pixels): the hover/focus approach enlarges the device
+   * about this point, e.g. the gameplay on a phone screen or the catalog row on the TV.
+   */
+  detail?: [number, number];
+  /** Hover/focus enlargement (default 1.075). */
+  hover?: number;
   /** Upper bound on the device's total scale relative to native pixels. */
   maxScale: number;
   alt: string;
@@ -86,6 +93,7 @@ export const PROJECTS: Project[] = [
       anchorBottom: true,
       objectScale: 1.1,
       objectOrigin: [140, 220],
+      detail: [148, 96],
       maxScale: 1.25,
       alt: 'Ray Adventure running on a smartphone: the game title and its young explorer hero fill the screen.',
     },
@@ -109,6 +117,8 @@ export const PROJECTS: Project[] = [
       anchorBottom: true,
       objectScale: 1.0,
       objectOrigin: [160, 220],
+      detail: [196, 176],
+      hover: 1.09,
       maxScale: 1.15,
       alt: 'The VelloraTV app on a television: side menu, an astronaut feature banner and a row of title artwork.',
     },
@@ -131,6 +141,7 @@ export const PROJECTS: Project[] = [
       place: [0.5, 0.5],
       objectScale: 1.0,
       objectOrigin: [178, 140],
+      detail: [214, 104],
       maxScale: 1.15,
       alt: 'The Neo Health dashboard on a laptop: patient overview chart and a count of 1,248 active patients.',
     },
@@ -153,6 +164,7 @@ export const PROJECTS: Project[] = [
       anchorBottom: true,
       objectScale: 1.0,
       objectOrigin: [126, 196],
+      detail: [128, 78],
       maxScale: 1.25,
       alt: 'A mobile wallet app showing a $4,860.50 balance, send and pay actions, and recent transactions.',
     },
@@ -174,6 +186,8 @@ export const PROJECTS: Project[] = [
       place: [0.5, 0.5],
       objectScale: 1.0,
       objectOrigin: [175, 95],
+      detail: [176, 100],
+      hover: 1.09,
       maxScale: 1.25,
       alt: 'A green embedded circuit board with copper traces, surface-mount chips and a Vellora-marked processor.',
     },
@@ -195,6 +209,7 @@ export const PROJECTS: Project[] = [
       place: [0.55, 0.5],
       objectScale: 1.0,
       objectOrigin: [190, 187],
+      detail: [34, 132],
       maxScale: 1.25,
       alt: 'A white industrial robot arm with articulated joints, lowering its gripper over a holographic work surface.',
     },

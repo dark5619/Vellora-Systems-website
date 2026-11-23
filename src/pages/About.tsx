@@ -1,9 +1,10 @@
+import { useRef, type CSSProperties } from 'react';
 import { Link } from 'react-router-dom';
-import { Plate } from '../components/Plate';
 import { RibbonEdge } from '../components/RibbonEdge';
-import { ButtonLink, Glyph } from '../components/primitives';
+import { ButtonLink, Glyph, Img } from '../components/primitives';
 import { asset } from '../lib/assets';
 import { FACTS } from '../data/site';
+import { useInView } from '../hooks/useInView';
 import { usePageTitle } from '../hooks/usePageTitle';
 import type { AssetKey } from '../lib/assets';
 import './About.css';
@@ -59,14 +60,23 @@ const PRACTICE = [
 
 export function AboutPage() {
   usePageTitle('About');
-  // The About package has no artwork between the hero plate (ends y=449) and the bottom ribbons
-  // (start y=673). The supplied transparent light strip carries the ribbons through that band.
-  const band = asset('01-Home/motion-ribbons/services-divider/02-ribbon');
+  const sceneRef = useRef<HTMLDivElement>(null);
+  const live = useInView(sceneRef);
+  const light = asset('06-About/derived/ribbon-light');
 
   return (
     <div className="page page--about">
+      {/* One art layer for the whole composition: the supplied hero plate joined to the design's
+          own ribbon band (derived in scripts/build-assets.mjs), so the office stays sharp to the
+          right edge and the ribbons run behind the metrics strip into the industries. */}
+      <div ref={sceneRef} className="ab-scene" data-live={live ? 'true' : 'false'}>
+        <div className="ab-art decor" aria-hidden="true">
+          <Img k="06-About/derived/hero-band" alt="" priority className="ab-art__img" sizes="(min-width: 1024px) 100vw, 180vw" />
+          <span className="ab-art__light" style={{ '--light-mask': `url(${light.src})` } as CSSProperties}>
+            <span className="ab-art__beam" />
+          </span>
+        </div>
       <section className="ab-hero" aria-labelledby="ab-title">
-        <Plate k="06-About/backgrounds/about-hero" priority focus="78% 50%" />
         <div className="ab-hero__text">
           <p className="ab-eyebrow">
             <span className="ab-eyebrow__flash" aria-hidden="true" />
@@ -104,10 +114,6 @@ export function AboutPage() {
         </div>
       </section>
 
-      <div className="ab-band decor" aria-hidden="true">
-        <img className="ab-band__ribbon" src={band.src} width={band.w} height={band.h} alt="" loading="lazy" decoding="async" />
-      </div>
-
       <section className="col ab-stats-wrap" aria-label="Vellora at a glance">
         <ul className="ab-stats" role="list">
           {STATS.map((s) => (
@@ -142,6 +148,7 @@ export function AboutPage() {
           ))}
         </ul>
       </section>
+      </div>
 
       <RibbonEdge base="06-About/motion-ribbons/lower-edge/01-base" strip="06-About/motion-ribbons/lower-edge/02-ribbon" className="ab-ribbon" />
 

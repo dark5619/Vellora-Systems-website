@@ -115,6 +115,9 @@ export function HomePage() {
       </section>
 
       <section className="home-services" aria-labelledby="services-title">
+        {/* The design's own band between hero and divider (cards filled from their surroundings):
+            the hero's ribbons and floor light carry on behind the cards. */}
+        <Img k="01-Home/derived/services-band" alt="" className="home-services__band decor" sizes="100vw" />
         <h2 id="services-title" className="visually-hidden">
           What we build
         </h2>

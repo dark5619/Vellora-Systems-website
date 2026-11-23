@@ -1,5 +1,5 @@
 import type { CSSProperties } from 'react';
-import { asset, placeIn, type AssetKey } from '../lib/assets';
+import { asset, avifSet, placeIn, type AssetKey } from '../lib/assets';
 
 interface Props {
   base: AssetKey;
@@ -8,6 +8,17 @@ interface Props {
   section?: { x: number; y: number; w: number; h: number };
   className?: string;
   style?: CSSProperties;
+}
+
+function Layer({ k, className, rect }: { k: AssetKey; className: string; rect: { x: number; y: number; w: number; h: number } }) {
+  const a = asset(k);
+  const avif = avifSet(k);
+  return (
+    <picture>
+      {avif && <source type="image/avif" srcSet={avif} sizes="100vw" />}
+      <img className={className} src={a.src} alt="" width={a.w} height={a.h} style={placeIn(k, rect)} decoding="async" loading="lazy" />
+    </picture>
+  );
 }
 
 /**
@@ -24,17 +35,8 @@ export function RibbonEdge({ base, strip, section, className = '', style }: Prop
       aria-hidden="true"
       style={{ aspectRatio: `${rect.w} / ${rect.h}`, ...style }}
     >
-      <img className="ribbon__base" src={b.src} alt="" width={b.w} height={b.h} style={placeIn(base, rect)} decoding="async" loading="lazy" />
-      <img
-        className="ribbon__strip"
-        src={asset(strip).src}
-        alt=""
-        width={asset(strip).w}
-        height={asset(strip).h}
-        style={placeIn(strip, rect)}
-        decoding="async"
-        loading="lazy"
-      />
+      <Layer k={base} className="ribbon__base" rect={rect} />
+      <Layer k={strip} className="ribbon__strip" rect={rect} />
     </div>
   );
 }

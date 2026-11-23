@@ -2,7 +2,7 @@
    About — reference 1199 × 711, plus the practice section and closing
    action below the lower-edge ribbon.
    ===================================================================== */
-.page--about { --design-w: 1199; background: #050d24; }
+.page--about { --design-w: 1199; background: #01142e; }
 
 .ab-eyebrow,
 .ab-kicker {
@@ -20,19 +20,37 @@
   height: 11px;
   background: linear-gradient(90deg, #c6f43a, #e4ff6a);
   clip-path: polygon(30% 0, 100% 0, 70% 100%, 0 100%);
-  box-shadow: 0 0 10px rgba(212, 252, 77, 0.6);
 }
 
-/* ---------- Hero ---------- */
-.ab-hero { position: relative; padding: calc(64px + 48px) 0 24px; overflow: hidden; }
-.ab-hero .plate::after {
-  content: '';
+/* ---------- Scene art: plate + derived ribbon band, one layer ---------- */
+.ab-scene { position: relative; }
+.ab-art {
+  position: relative;
+  height: clamp(300px, 86vw, 540px);
+  overflow: hidden;
+  background: #04102a;
+}
+.ab-art__img {
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, rgba(4, 10, 28, 0.9), rgba(4, 10, 28, 0.55) 70%, rgba(4, 10, 28, 0.3)),
-    linear-gradient(180deg, transparent 55%, #050d24);
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  object-position: 76% 30%;
 }
-.ab-hero__inner { padding-inline: var(--gutter); }
+/* Phones: the scene is a banner above the copy; it settles into the page colour. */
+.ab-art::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 34%;
+  background: linear-gradient(180deg, transparent, #01142e);
+}
+.ab-art__light { display: none; }
+
+/* ---------- Hero copy ---------- */
+.ab-hero { position: relative; margin-top: -56px; padding: 0 var(--gutter) 8px; }
 .ab-title {
   margin-top: 14px;
   font-size: clamp(32px, 8.6vw, 42px);
@@ -55,7 +73,7 @@
   background-clip: text;
   color: transparent;
 }
-.ab-copy { display: grid; gap: 12px; margin-top: 16px; max-width: 36em; font-size: 15px; line-height: 1.5; color: #eef1f7; }
+.ab-copy { display: grid; gap: 12px; margin-top: 16px; max-width: 36em; font-size: 15px; line-height: 1.55; color: #eef1f7; }
 .ab-pillars {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -65,13 +83,19 @@
   list-style: none;
 }
 .ab-pillar { display: grid; grid-template-columns: auto 1fr; column-gap: 10px; align-items: start; }
+@media (max-width: 479px) {
+  .ab-pillars { grid-template-columns: 1fr; gap: 12px; }
+}
 .ab-pillar__icon { grid-row: span 2; height: 34px; width: auto; }
 .ab-pillar__title { font-size: 14px; font-weight: 700; }
-.ab-pillar__desc { font-size: 12.5px; line-height: 1.35; color: #dfe4ee; }
+.ab-pillar__desc { font-size: 13px; line-height: 1.35; color: #e2e7f0; }
 
 /* ---------- Stats ---------- */
-.ab-stats-wrap { padding: 8px var(--gutter) 0; }
+.ab-stats-wrap { padding: 24px var(--gutter) 0; }
+/* Rim and fill sampled from 06_About: violet → cyan → blue → teal → lime around the glass,
+   indigo → blue → teal inside, translucent so the ribbon light passes behind it. */
 .ab-stats {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 18px 14px;
@@ -79,15 +103,29 @@
   padding: 18px;
   list-style: none;
   border-radius: 18px;
-  border: 1.5px solid rgba(110, 120, 255, 0.5);
-  background: linear-gradient(90deg, rgba(20, 30, 90, 0.75), rgba(16, 44, 70, 0.7) 60%, rgba(30, 70, 50, 0.55));
-  box-shadow: 0 0 22px rgba(90, 110, 255, 0.25), inset 0 0 20px rgba(120, 140, 255, 0.12);
+  border: 1.5px solid transparent;
+  background: linear-gradient(90deg, rgba(27, 40, 100, 0.86), rgba(8, 48, 90, 0.84) 52%, rgba(30, 70, 96, 0.72)) padding-box;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 0 18px rgba(80, 140, 255, 0.16);
 }
-.ab-stat__icon { height: 34px; filter: brightness(1.2) saturate(1.15); }
+/* The rim is a ring of its own: a gradient border painted under a translucent fill would show
+   its bright colours through the whole glass. */
+.ab-stats::before {
+  content: '';
+  position: absolute;
+  inset: -1.5px;
+  padding: 1.5px;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #a874e0 0%, #6a86ec 18%, #4bc1ea 44%, #4a86dd 64%, #5dc0b4 84%, #e6fb7a 100%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  pointer-events: none;
+}
+.ab-stat__icon { height: 34px; }
 .ab-stat__value { font-size: 22px; }
 .ab-stat--e2e .ab-stat__value,
 .ab-stat--global .ab-stat__value { font-size: 15px; }
-.ab-stat__label { font-size: 13.4px; }
+.ab-stat__label { font-size: 13.4px; color: #e8ecf5; }
 
 /* ---------- Industries ---------- */
 .ab-industries { padding: 32px var(--gutter) 0; }
@@ -102,6 +140,8 @@
 @media (min-width: 560px) {
   .ab-ind__grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
+/* Tinted glass, as in 06_About: the colour lives in the rim and upper fill; the icon keeps its
+   own neon without a brightness filter. */
 .icard {
   --tone: #8f6bff;
   display: grid;
@@ -111,10 +151,9 @@
   min-height: 99px;
   padding: 12px 6px;
   border-radius: 12px;
-  border: 1.5px solid color-mix(in srgb, var(--tone) 70%, transparent);
-  /* Restrained surfaces: dark centre, colour kept to the rim and a faint inner glow. */
-  background: linear-gradient(180deg, color-mix(in srgb, var(--tone) 17%, #080d26), color-mix(in srgb, var(--tone) 6%, #060a1e));
-  box-shadow: 0 0 12px color-mix(in srgb, var(--tone) 26%, transparent), inset 0 0 16px color-mix(in srgb, var(--tone) 12%, transparent);
+  border: 1.5px solid color-mix(in srgb, var(--tone) 78%, transparent);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--tone) 30%, #0a1030), color-mix(in srgb, var(--tone) 9%, #071029));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), inset 0 0 18px color-mix(in srgb, var(--tone) 14%, transparent);
   text-align: center;
   transition: box-shadow var(--t-control) var(--ease), border-color var(--t-control) var(--ease);
 }
@@ -126,10 +165,13 @@
 .icard--purple { --tone: #8b5cf6; }
 .icard--lime { --tone: #5ccf7c; }
 .icard:hover,
-.icard:focus-visible { border-color: var(--tone); box-shadow: 0 0 22px color-mix(in srgb, var(--tone) 55%, transparent), inset 0 0 18px color-mix(in srgb, var(--tone) 18%, transparent); }
+.icard:focus-visible {
+  border-color: var(--tone);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), inset 0 0 20px color-mix(in srgb, var(--tone) 22%, transparent), 0 0 18px color-mix(in srgb, var(--tone) 40%, transparent);
+}
 .icard:focus-visible { outline-offset: 3px; border-radius: 12px; }
-.icard__icon { height: 38px; width: auto; max-width: none; filter: brightness(1.18) saturate(1.15) drop-shadow(0 0 6px color-mix(in srgb, var(--tone) 55%, transparent)); }
-.icard__label { font-size: 13.4px; line-height: 1.2; font-weight: 500; }
+.icard__icon { height: 38px; width: auto; max-width: none; filter: drop-shadow(0 0 5px color-mix(in srgb, var(--tone) 45%, transparent)); }
+.icard__label { font-size: 13.4px; line-height: 1.2; font-weight: 560; }
 
 .ab-ribbon { margin-top: 32px; width: 100%; }
 
@@ -164,45 +206,82 @@
   margin-top: 28px;
   padding: 26px 26px;
   border-color: rgba(212, 252, 77, 0.35);
-  box-shadow: 0 0 26px rgba(212, 252, 77, 0.12);
 }
 .ab-close__title { font-size: clamp(20px, 3vw, 26px); line-height: 1.2; font-weight: 760; }
 .ab-close__text { margin-top: 6px; color: var(--text-2); font-size: 15px; }
 .ab-close__actions { display: flex; flex-wrap: wrap; gap: 12px; }
 
 /* =====================================================================
-   Desktop — fluid composition.
-   --dp  one reference pixel, follows the viewport (artwork, strip/grid widths, section heights)
-   --t   type and controls: reference size up to 1199px, natural size beyond
-   At 1199 × 711 this reproduces 06_About.png; wider screens keep the text at its natural size
-   near the left gutter while the office reaches the right edge and the metrics strip and
-   industry row keep their share of the width (≈78% and ≈91%).
+   Desktop — one composition on the art's own coordinates.
+   --dp  one reference pixel (artwork, metrics strip, industry row: all tied to the ribbons)
+   --t   type and controls: --dp up to 1199px, then 90% of its growth, so the copy still meets
+         the V as in the design while staying a readable size
    ===================================================================== */
-.ab-band { display: none; }
-
 @media (min-width: 1024px) {
-  .page--about { --t: min(1px, calc(100cqw / 1199)); }
+  .page--about { --t-grow: 0.9; }
 
-  /* ---------- Hero: plate full width at its own aspect ---------- */
-  .ab-hero { height: calc(449 * var(--dp)); padding: 0; overflow: visible; }
-  .ab-hero .plate::after { display: none; }
-  .ab-hero .plate {
-    /* soft lower edge instead of a hard cut into the band below */
-    -webkit-mask-image: linear-gradient(180deg, #000 calc(100% - 46 * var(--dp)), transparent);
-    mask-image: linear-gradient(180deg, #000 calc(100% - 46 * var(--dp)), transparent);
+  .ab-scene { height: calc(676 * var(--dp)); }
+  .ab-art {
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: calc(676 * var(--dp));
+    z-index: 0;
+  }
+  .ab-art::after { display: none; }
+  .ab-art__img {
+    inset: 0 0 auto 0;
+    margin-inline: auto;
+    width: calc(1199 * var(--dp));
+    height: auto;
+    object-fit: fill;
+  }
+
+  /* Ribbon light: a narrow beam travels along the ribbon (traced into the mask from the
+     artwork), passing behind the glass strip, then rests. Only ribbon pixels can light up. */
+  .ab-art__light {
+    display: block;
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    -webkit-mask-image: var(--light-mask);
+    mask-image: var(--light-mask);
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    mix-blend-mode: screen;
+  }
+  .ab-art__beam {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 22%;
+    background: linear-gradient(90deg, transparent, rgba(210, 255, 236, 0.16) 30%, rgba(236, 255, 246, 0.85) 50%, rgba(210, 255, 236, 0.16) 70%, transparent);
+    transform: translateX(-110%);
+    animation: ab-beam 11s cubic-bezier(0.45, 0.05, 0.4, 1) 1.2s infinite;
+    will-change: transform;
+  }
+  .ab-scene[data-live='false'] .ab-art__beam { animation-play-state: paused; }
+
+  .ab-hero {
+    position: absolute;
+    inset: 0 0 auto 0;
+    z-index: 1;
+    height: calc(449 * var(--dp));
+    margin: 0;
+    padding: 0;
   }
   .ab-hero__text {
     position: absolute;
-    z-index: 1;
-    left: calc(57 * var(--dp));
-    /* reference position at 1199; extra hero height on wide screens is shared above/below */
-    top: calc(93.3 * var(--t) + (449 * var(--dp) - 449 * var(--t)) * 0.45);
+    /* the design's 57px; on screens wider than the 1672px header, aligned under the lockup */
+    left: max(calc(57 * var(--dp)), calc(50vw - 836px + 73px));
+    top: calc(93.3 * var(--dp));
     width: max-content;
     padding: 0;
   }
   .ab-eyebrow {
     gap: calc(12 * var(--t));
-    font-size: max(10px, calc(10.8 * var(--t)));
+    font-size: max(10.5px, calc(10.8 * var(--t)));
     letter-spacing: 0.17em;
     line-height: 1;
   }
@@ -218,15 +297,16 @@
     max-width: none;
     gap: calc(11 * var(--t));
     white-space: nowrap;
-    font-size: max(11.5px, calc(13.4 * var(--t)));
+    font-size: max(12px, calc(13.4 * var(--t)));
     line-height: calc(18 * var(--t));
+    color: #f1f4f9;
   }
   .ab-copy p:last-child { line-height: calc(17.5 * var(--t)); }
 
   /* Build / Integrate / Grow: one compact row under the copy */
   .ab-pillars {
     display: grid;
-    grid-template-columns: calc(178 * var(--t)) calc(181 * var(--t)) auto;
+    grid-template-columns: calc(186 * var(--t)) calc(185 * var(--t)) auto;
     gap: 0;
     margin: calc(14 * var(--t)) 0 0 calc(6 * var(--t));
   }
@@ -241,7 +321,7 @@
   .ab-pillar:not(:first-child)::before {
     content: '';
     position: absolute;
-    left: calc(-18 * var(--t));
+    left: calc(-14 * var(--t));
     top: calc(4 * var(--t));
     width: 1px;
     height: calc(38 * var(--t));
@@ -250,66 +330,41 @@
   .ab-pillar__icon { grid-row: span 2; width: calc(41 * var(--t)); height: auto; }
   .ab-pillar--integrate .ab-pillar__icon,
   .ab-pillar--grow .ab-pillar__icon { width: calc(42 * var(--t)); }
-  .ab-pillar__title { margin-top: calc(1.3 * var(--t)); font-size: max(11px, calc(12.2 * var(--t))); line-height: 1; white-space: nowrap; }
-  .ab-pillar__desc { margin-top: calc(6 * var(--t)); font-size: max(10px, calc(11.4 * var(--t))); line-height: calc(16 * var(--t)); white-space: nowrap; }
+  .ab-pillar__title { margin-top: calc(1.3 * var(--t)); font-size: max(11.5px, calc(12.2 * var(--t))); line-height: 1; white-space: nowrap; }
+  .ab-pillar__desc { margin-top: calc(6 * var(--t)); font-size: max(11px, calc(11.4 * var(--t))); line-height: calc(16 * var(--t)); white-space: nowrap; }
   .ab-pillar--grow .ab-pillar__title,
   .ab-pillar--grow .ab-pillar__desc { margin-left: calc(-1 * var(--t)); }
 
-  /* ---------- Ribbon band behind the metrics strip and industries ---------- */
-  .ab-band {
-    display: block;
+  /* ---------- Metrics strip: x 134–1072, y 448–526 on the art ---------- */
+  .ab-stats-wrap {
     position: absolute;
-    z-index: 0;
-    left: 0;
-    right: 0;
-    top: calc(392 * var(--dp));
-    height: calc(200 * var(--dp));
-    overflow: hidden;
-    pointer-events: none;
-    /* the light shows at both sides and passes behind the glass strip */
-    -webkit-mask-image: linear-gradient(90deg, #000 0, #000 16%, rgba(0, 0, 0, 0.25) 34%, rgba(0, 0, 0, 0.25) 66%, #000 84%, #000 100%);
-    mask-image: linear-gradient(90deg, #000 0, #000 16%, rgba(0, 0, 0, 0.25) 34%, rgba(0, 0, 0, 0.25) 66%, #000 84%, #000 100%);
-  }
-  .ab-band__ribbon {
-    position: absolute;
-    left: -6%;
-    top: 26%;
-    width: 112%;
-    max-width: none;
-    height: auto;
-    transform: rotate(-3deg);
-  }
-
-  /* ---------- Metrics strip: x 135–1072 at 1199, ≈78% of any wider viewport ---------- */
-  .ab-stats-wrap { position: relative; z-index: 2; height: auto; padding: calc(1 * var(--t)) 0 calc(4 * var(--t)); }
-  .ab-stats {
-    position: relative;
-    left: auto;
-    top: auto;
-    width: calc(935 * var(--dp));
-    height: calc(76 * var(--t) + (var(--dp) - var(--t)) * 22);
-    margin-left: calc(137 * var(--dp));
+    z-index: 2;
+    left: calc(134 * var(--dp));
+    top: calc(448 * var(--dp));
+    width: calc(938 * var(--dp));
+    height: calc(78 * var(--dp));
     padding: 0;
-    display: grid;
+  }
+  .ab-stats {
+    height: 100%;
+    padding: 0;
     grid-template-columns: 221fr 236fr 235fr 243fr;
     align-items: center;
-    border-radius: calc(18 * var(--t));
-    border: 1px solid rgba(140, 150, 255, 0.55);
-    background: linear-gradient(90deg, rgba(14, 22, 70, 0.72), rgba(10, 30, 60, 0.62) 60%, rgba(18, 50, 40, 0.5));
-    box-shadow: 0 0 0 1px rgba(90, 210, 255, 0.08), 0 0 20px rgba(90, 110, 255, 0.22), inset 0 0 18px rgba(120, 140, 255, 0.1);
-    backdrop-filter: blur(10px) saturate(1.2);
-    -webkit-backdrop-filter: blur(10px) saturate(1.2);
+    gap: 0;
+    border-radius: calc(18 * var(--dp));
+    backdrop-filter: blur(9px);
+    -webkit-backdrop-filter: blur(9px);
   }
   .ab-stat { position: relative; display: flex; align-items: center; gap: calc(12 * var(--t)); height: 100%; }
   .ab-stat > span { display: block; white-space: nowrap; }
   .ab-stat__icon { width: auto; }
-  .ab-stat--team { padding-left: calc(37 * var(--t)); }
+  .ab-stat--team { padding-left: calc(37 * var(--dp)); }
   .ab-stat--team .ab-stat__icon { height: calc(46 * var(--t)); }
-  .ab-stat--e2e { padding-left: calc(36 * var(--t)); }
+  .ab-stat--e2e { padding-left: calc(36 * var(--dp)); }
   .ab-stat--e2e .ab-stat__icon { height: calc(50 * var(--t)); }
-  .ab-stat--years { padding-left: calc(32 * var(--t)); }
+  .ab-stat--years { padding-left: calc(32 * var(--dp)); }
   .ab-stat--years .ab-stat__icon { height: calc(47 * var(--t)); }
-  .ab-stat--global { padding-left: calc(29 * var(--t)); gap: calc(14 * var(--t)); }
+  .ab-stat--global { padding-left: calc(29 * var(--dp)); gap: calc(14 * var(--t)); }
   .ab-stat--global .ab-stat__icon { height: calc(49 * var(--t)); }
   .ab-stat:not(:first-child)::before {
     content: '';
@@ -317,39 +372,55 @@
     left: 0;
     top: 50%;
     width: 1px;
-    height: calc(38 * var(--t));
+    height: calc(38 * var(--dp));
     transform: translateY(-50%);
     background: rgba(200, 212, 240, 0.35);
   }
   .ab-stat__value { font-size: calc(24 * var(--t)); line-height: 1; }
-  .ab-stat__label { margin-top: calc(2.5 * var(--t)); font-size: max(11px, calc(14.8 * var(--t))); line-height: 1; }
+  .ab-stat__label { margin-top: calc(2.5 * var(--t)); font-size: max(11.5px, calc(14.8 * var(--t))); line-height: 1; }
   .ab-stat--e2e .ab-stat__value { font-size: calc(19 * var(--t)); }
   .ab-stat--global .ab-stat__value { font-size: calc(14.8 * var(--t)); font-weight: 700; }
-  .ab-stat--global .ab-stat__label { margin-top: calc(5 * var(--t)); font-size: max(11px, calc(14.2 * var(--t))); }
+  .ab-stat--global .ab-stat__label { margin-top: calc(5 * var(--t)); font-size: max(11.5px, calc(14.2 * var(--t))); }
 
-  /* ---------- Industries: x 67–1159 at 1199, ≈91% of any wider viewport ---------- */
-  .ab-industries { position: relative; z-index: 2; height: auto; padding: calc(18.3 * var(--t)) calc(40 * var(--dp)) calc(4 * var(--t)) calc(67 * var(--dp)); }
-  .ab-kicker { gap: calc(11 * var(--t)); font-size: max(10px, calc(10.8 * var(--t))); letter-spacing: 0.17em; line-height: 1; }
+  /* ---------- Industries: kicker at y 549, cards x 67–1159, y 573–672 ---------- */
+  .ab-industries {
+    position: absolute;
+    z-index: 2;
+    left: calc(67 * var(--dp));
+    top: calc(549 * var(--dp));
+    width: calc(1092 * var(--dp));
+    padding: 0;
+  }
+  .ab-kicker { gap: calc(11 * var(--t)); font-size: max(10.5px, calc(10.8 * var(--t))); letter-spacing: 0.17em; line-height: 1; height: calc(11 * var(--dp)); }
   .ab-industries .ab-kicker { margin-left: calc(-2 * var(--dp)); }
   .ab-kicker .ab-eyebrow__flash { width: calc(22 * var(--t)); height: calc(11 * var(--t)); }
   .ab-ind__grid {
-    margin: calc(13.9 * var(--t)) 0 0;
+    margin: calc(13 * var(--dp)) 0 0;
     grid-template-columns: 126fr 125fr 124fr 124fr 123fr 127fr 127fr 127fr;
     gap: calc(12 * var(--dp));
   }
   .icard {
     min-height: 0;
-    height: calc(99 * var(--t) + (var(--dp) - var(--t)) * 36);
+    height: calc(99 * var(--dp));
     padding: 0;
     gap: calc(2.5 * var(--t));
     align-content: center;
-    border-radius: calc(12 * var(--t));
+    border-radius: calc(12 * var(--dp));
   }
   .icard__icon { height: calc(42 * var(--t)); margin-top: calc(-4 * var(--t)); }
-  .icard__label { font-size: max(11px, calc(13.2 * var(--t))); line-height: calc(16 * var(--t)); white-space: nowrap; }
+  .icard__label { font-size: max(11.5px, calc(13.2 * var(--t))); line-height: calc(16 * var(--t)); white-space: nowrap; }
 
   .ab-ribbon { position: relative; z-index: 1; margin: 0; height: calc(35 * var(--dp)); aspect-ratio: auto !important; }
 
-  .ab-practice { padding-top: 64px; padding-inline: calc(57 * var(--dp)); }
+  .ab-practice { padding-top: 64px; padding-inline: max(calc(57 * var(--dp)), calc(50vw - 836px + 73px)); }
   .ab-practice__lead { max-width: 40em; }
+}
+
+@keyframes ab-beam {
+  0% { transform: translateX(-110%); }
+  42% { transform: translateX(560%); }
+  100% { transform: translateX(560%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ab-art__light { display: none; }
 }
