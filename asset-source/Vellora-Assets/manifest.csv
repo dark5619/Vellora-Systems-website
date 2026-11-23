@@ -1,0 +1,278 @@
+file,source,x,y,width,height,kind,alpha_ink_bounds,notes
+Shared-Brand/primary-home/lockup.png,01_Home.png,68,18,266,67,Masked cutout,"[6, 3, 264, 63]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Brand/primary-home/symbol.png,01_Home.png,68,18,85,67,Masked cutout,"[6, 4, 82, 63]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Brand/primary-home/wordmark.png,01_Home.png,153,18,181,67,Masked cutout,"[4, 7, 179, 61]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Brand/02-our-work/lockup.png,02_Our_Work.png,56,8,206,53,Masked cutout,"[4, 4, 202, 53]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Brand/02-our-work/symbol.png,02_Our_Work.png,56,8,69,53,Masked cutout,"[4, 4, 68, 53]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Brand/02-our-work/wordmark.png,02_Our_Work.png,125,8,137,53,Masked cutout,"[1, 5, 133, 51]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Brand/03-case-study/lockup.png,03_Project_Case_Study.png,52,7,182,51,Masked cutout,"[4, 4, 180, 49]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Brand/03-case-study/symbol.png,03_Project_Case_Study.png,52,7,65,51,Masked cutout,"[4, 4, 62, 49]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Brand/03-case-study/wordmark.png,03_Project_Case_Study.png,117,7,117,51,Masked cutout,"[1, 6, 114, 49]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Brand/04-expertise/lockup.png,04_Expertise.png,79,12,240,56,Masked cutout,"[6, 4, 238, 53]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Brand/04-expertise/symbol.png,04_Expertise.png,79,12,76,56,Masked cutout,"[6, 4, 74, 54]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Brand/04-expertise/wordmark.png,04_Expertise.png,155,12,164,56,Masked cutout,"[7, 5, 162, 53]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Brand/05-studio/lockup.png,05_Studio_And_Team.png,42,8,177,49,Masked cutout,"[3, 2, 176, 46]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Brand/05-studio/symbol.png,05_Studio_And_Team.png,42,8,60,49,Masked cutout,"[3, 2, 57, 46]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Brand/05-studio/wordmark.png,05_Studio_And_Team.png,102,8,117,49,Masked cutout,"[1, 3, 116, 45]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Brand/06-about/lockup.png,06_About.png,48,7,181,49,Masked cutout,"[4, 1, 179, 47]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Brand/06-about/symbol.png,06_About.png,48,7,62,49,Masked cutout,"[4, 1, 60, 47]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Brand/06-about/wordmark.png,06_About.png,110,7,119,49,Masked cutout,"[1, 6, 117, 47]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Brand/partners/raymobilegames.png,01_Home.png,242,851,235,41,Masked cutout,"[3, 7, 233, 34]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Brand/partners/neo-health.png,01_Home.png,506,847,175,46,Masked cutout,"[5, 8, 172, 40]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/home/section-flash.png,01_Home.png,74,133,32,23,Masked cutout,"[4, 4, 29, 19]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/home/play-circle.png,01_Home.png,389,428,61,61,Masked cutout,"[4, 3, 61, 58]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/home/games.png,01_Home.png,83,596,46,36,Masked cutout,"[0, 0, 41, 36]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/home/streaming.png,01_Home.png,409,595,38,38,Masked cutout,"[0, 0, 38, 38]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/home/healthcare.png,01_Home.png,719,594,40,38,Masked cutout,"[0, 4, 37, 32]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/home/fintech.png,01_Home.png,1033,595,37,38,Masked cutout,"[0, 3, 36, 38]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/home/hardware.png,01_Home.png,1338,593,41,40,Masked cutout,"[3, 3, 36, 35]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/home/team-layers.png,01_Home.png,1121,841,45,42,Masked cutout,"[4, 3, 45, 36]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/home/projects-layers.png,01_Home.png,1301,841,39,40,Masked cutout,"[2, 5, 39, 36]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/home/industries-trophy.png,01_Home.png,1491,837,43,42,Masked cutout,"[4, 7, 39, 39]",Local background estimated from perimeter pixels. Kept at source size.
+01-Home/card-references/games.png,01_Home.png,60,582,311,170,Exact crop,,
+01-Home/card-references/streaming.png,01_Home.png,389,582,292,169,Exact crop,,
+01-Home/card-references/healthcare.png,01_Home.png,698,582,294,168,Exact crop,,
+01-Home/card-references/fintech.png,01_Home.png,1009,581,292,169,Exact crop,,
+01-Home/card-references/hardware-robotics.png,01_Home.png,1319,581,316,168,Exact crop,,
+01-Home/artwork/hero-landscape-and-v.png,01_Home.png,811,90,861,477,Exact crop,,
+01-Home/artwork/games-character-detail.png,01_Home.png,254,588,111,156,Exact crop,,
+01-Home/artwork/streaming-screen-detail.png,01_Home.png,567,631,108,112,Exact crop,,
+01-Home/artwork/healthcare-screen-detail.png,01_Home.png,886,593,99,124,Exact crop,,
+01-Home/artwork/banking-screen-detail.png,01_Home.png,1218,611,76,98,Exact crop,,
+01-Home/artwork/robotic-arm-detail.png,01_Home.png,1522,597,106,144,Exact crop,,
+01-Home/card-art/games.png,01_Home.png,64,585,303,163,Reconstructed,"[0, 0, 303, 163]",Underlying pixels rebuilt where interface elements covered the artwork.
+01-Home/card-art/streaming.png,01_Home.png,393,585,284,162,Reconstructed,"[0, 0, 284, 162]",Underlying pixels rebuilt where interface elements covered the artwork.
+01-Home/card-art/healthcare.png,01_Home.png,702,585,286,161,Reconstructed,"[0, 0, 286, 161]",Underlying pixels rebuilt where interface elements covered the artwork.
+01-Home/card-art/fintech.png,01_Home.png,1013,584,284,162,Reconstructed,"[0, 0, 284, 162]",Underlying pixels rebuilt where interface elements covered the artwork.
+01-Home/card-art/hardware-robotics.png,01_Home.png,1323,584,308,161,Reconstructed,"[0, 0, 308, 161]",Underlying pixels rebuilt where interface elements covered the artwork.
+01-Home/backgrounds/hero-with-v.png,01_Home.png,0,0,1672,581,Reconstructed,,Underlying pixels rebuilt where interface elements covered the artwork.
+02-Our-Work/card-references/casual-mobile-games.png,02_Our_Work.png,23,347,377,379,Exact crop,,
+02-Our-Work/project-art/casual-mobile-games.png,02_Our_Work.png,26,350,371,225,Reconstructed,"[0, 0, 371, 225]",Portfolio thumbnail. Rebuilt the small upper-left corner under its category badge.
+02-Our-Work/card-references/tv-streaming.png,02_Our_Work.png,415,347,370,379,Exact crop,,
+02-Our-Work/project-art/tv-streaming.png,02_Our_Work.png,418,350,364,225,Reconstructed,"[0, 0, 364, 225]",Portfolio thumbnail. Rebuilt the small upper-left corner under its category badge.
+02-Our-Work/card-references/healthcare-web.png,02_Our_Work.png,802,347,376,379,Exact crop,,
+02-Our-Work/project-art/healthcare-web.png,02_Our_Work.png,805,350,370,225,Reconstructed,"[0, 0, 370, 225]",Portfolio thumbnail. Rebuilt the small upper-left corner under its category badge.
+02-Our-Work/card-references/fintech-dashboard.png,02_Our_Work.png,23,742,377,357,Exact crop,,
+02-Our-Work/project-art/fintech-dashboard.png,02_Our_Work.png,26,745,371,202,Reconstructed,"[0, 0, 371, 202]",Portfolio thumbnail. Rebuilt the small upper-left corner under its category badge.
+02-Our-Work/card-references/pcb-design.png,02_Our_Work.png,415,742,370,357,Exact crop,,
+02-Our-Work/project-art/pcb-design.png,02_Our_Work.png,418,745,364,202,Reconstructed,"[0, 0, 364, 202]",Portfolio thumbnail. Rebuilt the small upper-left corner under its category badge.
+02-Our-Work/card-references/robotics-automation.png,02_Our_Work.png,802,742,376,357,Exact crop,,
+02-Our-Work/project-art/robotics-automation.png,02_Our_Work.png,805,745,370,202,Reconstructed,"[0, 0, 370, 202]",Portfolio thumbnail. Rebuilt the small upper-left corner under its category badge.
+02-Our-Work/backgrounds/portfolio-hero.png,02_Our_Work.png,0,0,1199,268,Reconstructed,,Underlying pixels rebuilt where interface elements covered the artwork.
+02-Our-Work/artwork/mountains-orbit-and-v.png,02_Our_Work.png,556,59,643,209,Exact crop,,
+02-Our-Work/backgrounds/footer-ribbons.png,02_Our_Work.png,0,1101,1199,211,Reconstructed,,Underlying pixels rebuilt where interface elements covered the artwork.
+Shared-Icons/portfolio-filters/games.png,02_Our_Work.png,200,281,33,26,Masked cutout,"[2, 1, 31, 24]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/portfolio-filters/streaming.png,02_Our_Work.png,330,279,32,29,Masked cutout,"[0, 0, 32, 26]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/portfolio-filters/healthcare.png,02_Our_Work.png,480,279,32,28,Masked cutout,"[0, 1, 28, 26]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/portfolio-filters/fintech.png,02_Our_Work.png,636,278,29,31,Masked cutout,"[1, 0, 27, 28]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/portfolio-filters/mobile.png,02_Our_Work.png,768,278,23,31,Masked cutout,"[0, 1, 22, 28]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/portfolio-filters/hardware.png,02_Our_Work.png,888,277,32,32,Masked cutout,"[1, 2, 32, 28]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/portfolio-filters/robotics.png,02_Our_Work.png,1037,278,32,30,Masked cutout,"[3, 2, 32, 26]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/portfolio/section-flash.png,02_Our_Work.png,62,91,35,25,Masked cutout,"[3, 1, 32, 22]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/portfolio/external-link.png,02_Our_Work.png,352,680,30,29,Masked cutout,"[3, 3, 28, 24]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/portfolio/projects-rocket.png,02_Our_Work.png,60,1192,44,43,Masked cutout,"[5, 4, 38, 37]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/portfolio/team.png,02_Our_Work.png,242,1192,42,33,Masked cutout,"[4, 4, 39, 27]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/portfolio/industries-globe.png,02_Our_Work.png,380,1192,43,43,Masked cutout,"[6, 4, 40, 39]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/portfolio/focus-star.png,02_Our_Work.png,529,1190,40,36,Masked cutout,"[5, 6, 35, 36]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/portfolio-badges/casual-mobile-games.png,02_Our_Work.png,54,364,27,21,Masked cutout,"[0, 1, 24, 21]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/portfolio-badges/tv-streaming.png,02_Our_Work.png,446,364,27,21,Masked cutout,"[0, 0, 27, 21]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/portfolio-badges/healthcare-web.png,02_Our_Work.png,833,364,27,21,Masked cutout,"[0, 0, 27, 21]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/portfolio-badges/fintech-dashboard.png,02_Our_Work.png,54,759,27,21,Masked cutout,"[0, 0, 25, 21]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/portfolio-badges/pcb-design.png,02_Our_Work.png,446,759,27,21,Masked cutout,"[0, 0, 24, 21]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/portfolio-badges/robotics-automation.png,02_Our_Work.png,833,759,27,21,Masked cutout,"[0, 0, 26, 21]",Local background estimated from perimeter pixels. Kept at source size.
+03-Case-Study/backgrounds/streaming-hero.png,03_Project_Case_Study.png,0,0,1199,486,Reconstructed,,Underlying pixels rebuilt where interface elements covered the artwork.
+03-Case-Study/artwork/streaming-device-scene.png,03_Project_Case_Study.png,536,72,619,392,Exact crop,,
+03-Case-Study/artwork/tv-and-smartphone.png,03_Project_Case_Study.png,535,72,614,390,Masked cutout,"[3, 2, 610, 387]",Combined silhouette preserves the real overlap between the phone and television.
+03-Case-Study/screen-details/featured-astronaut.png,03_Project_Case_Study.png,942,168,155,147,Exact crop,,
+03-Case-Study/screen-details/trending-01.png,03_Project_Case_Study.png,704,367,88,43,Exact crop,,
+03-Case-Study/screen-details/trending-02.png,03_Project_Case_Study.png,813,365,91,44,Exact crop,,
+03-Case-Study/screen-details/trending-03.png,03_Project_Case_Study.png,925,362,87,47,Exact crop,,
+03-Case-Study/screen-details/trending-04.png,03_Project_Case_Study.png,1035,359,88,46,Exact crop,,
+Shared-Icons/case-study/tv.png,03_Project_Case_Study.png,45,339,46,39,Masked cutout,"[0, 3, 43, 39]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/case-study/phone.png,03_Project_Case_Study.png,132,337,33,41,Masked cutout,"[3, 5, 29, 39]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/case-study/web-globe.png,03_Project_Case_Study.png,207,337,39,40,Masked cutout,"[3, 4, 36, 37]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/case-study/ott-cast.png,03_Project_Case_Study.png,277,339,39,37,Masked cutout,"[4, 2, 36, 32]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/case-study/industry.png,03_Project_Case_Study.png,52,497,37,37,Masked cutout,"[6, 5, 35, 30]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/case-study/calendar.png,03_Project_Case_Study.png,310,496,36,38,Masked cutout,"[2, 3, 34, 33]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/case-study/team.png,03_Project_Case_Study.png,503,498,40,36,Masked cutout,"[3, 0, 36, 30]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/case-study/platforms.png,03_Project_Case_Study.png,766,496,38,38,Masked cutout,"[3, 0, 35, 32]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/case-study/challenge-target.png,03_Project_Case_Study.png,42,578,42,42,Masked cutout,"[2, 4, 38, 40]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/case-study/solution-bolt.png,03_Project_Case_Study.png,433,579,38,39,Masked cutout,"[6, 5, 35, 34]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/case-study/tech-stack.png,03_Project_Case_Study.png,792,578,40,40,Masked cutout,"[2, 3, 40, 40]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/case-study/outcome-bars.png,03_Project_Case_Study.png,80,783,38,35,Masked cutout,"[4, 3, 36, 30]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/case-study/section-flash.png,03_Project_Case_Study.png,41,883,39,25,Masked cutout,"[3, 4, 34, 17]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/technology/react.png,03_Project_Case_Study.png,808,628,42,40,Masked cutout,"[2, 0, 37, 39]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/technology/nodejs.png,03_Project_Case_Study.png,930,627,39,41,Masked cutout,"[0, 0, 36, 37]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/technology/flutter.png,03_Project_Case_Study.png,1054,628,34,40,Masked cutout,"[5, 4, 31, 34]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/technology/aws.png,03_Project_Case_Study.png,804,688,50,36,Masked cutout,"[6, 4, 47, 33]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/technology/ffmpeg.png,03_Project_Case_Study.png,929,689,42,37,Masked cutout,"[4, 0, 42, 34]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/technology/docker.png,03_Project_Case_Study.png,1052,688,45,38,Masked cutout,"[6, 6, 45, 32]",Local background estimated from perimeter pixels. Kept at source size.
+03-Case-Study/card-references/games.png,03_Project_Case_Study.png,46,925,269,172,Exact crop,,
+03-Case-Study/related-project-art/games.png,03_Project_Case_Study.png,53,930,255,81,Exact crop,,Unobstructed artwork above the overlaid category and title.
+03-Case-Study/card-references/care-platform.png,03_Project_Case_Study.png,328,925,265,172,Exact crop,,
+03-Case-Study/related-project-art/care-platform.png,03_Project_Case_Study.png,335,930,251,81,Exact crop,,Unobstructed artwork above the overlaid category and title.
+03-Case-Study/card-references/mobile-banking.png,03_Project_Case_Study.png,607,925,266,172,Exact crop,,
+03-Case-Study/related-project-art/mobile-banking.png,03_Project_Case_Study.png,614,930,252,81,Exact crop,,Unobstructed artwork above the overlaid category and title.
+03-Case-Study/card-references/pcb-robotics.png,03_Project_Case_Study.png,885,925,269,172,Exact crop,,
+03-Case-Study/related-project-art/pcb-robotics.png,03_Project_Case_Study.png,892,930,255,81,Exact crop,,Unobstructed artwork above the overlaid category and title.
+03-Case-Study/backgrounds/mountain-footer.png,03_Project_Case_Study.png,0,1103,1199,209,Reconstructed,,Underlying pixels rebuilt where interface elements covered the artwork.
+04-Expertise/card-references/full-stack.png,04_Expertise.png,448,134,328,143,Exact crop,,
+04-Expertise/card-references/games.png,04_Expertise.png,800,106,292,114,Exact crop,,
+04-Expertise/card-references/advertising.png,04_Expertise.png,1117,134,360,137,Exact crop,,
+04-Expertise/card-references/mobile-apps.png,04_Expertise.png,383,304,346,116,Exact crop,,
+04-Expertise/card-references/tv-streaming.png,04_Expertise.png,1188,289,417,109,Exact crop,,
+04-Expertise/card-references/healthcare.png,04_Expertise.png,346,440,340,113,Exact crop,,
+04-Expertise/card-references/fitness.png,04_Expertise.png,1214,408,412,103,Exact crop,,
+04-Expertise/card-references/pcb.png,04_Expertise.png,315,569,396,121,Exact crop,,
+04-Expertise/card-references/fintech.png,04_Expertise.png,1182,521,430,104,Exact crop,,
+04-Expertise/card-references/cad.png,04_Expertise.png,747,676,395,119,Exact crop,,
+04-Expertise/card-references/robotics.png,04_Expertise.png,1180,638,409,118,Exact crop,,
+04-Expertise/artwork/central-v-and-platform.png,04_Expertise.png,748,350,390,308,Exact crop,,
+Shared-Icons/expertise/section-flash.png,04_Expertise.png,51,150,34,24,Masked cutout,"[5, 4, 28, 20]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/expertise/search.png,04_Expertise.png,1377,24,26,29,Masked cutout,"[0, 2, 26, 27]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/expertise/domains.png,04_Expertise.png,56,834,50,48,Masked cutout,"[0, 1, 50, 48]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/expertise/code.png,04_Expertise.png,304,838,54,44,Masked cutout,"[1, 6, 53, 30]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/expertise/team.png,04_Expertise.png,544,838,50,42,Masked cutout,"[2, 4, 50, 38]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/expertise/end-to-end.png,04_Expertise.png,789,831,41,52,Masked cutout,"[0, 6, 35, 48]",Local background estimated from perimeter pixels. Kept at source size.
+05-Studio/card-references/eryk-dobek.png,05_Studio_And_Team.png,17,440,322,332,Exact crop,,
+05-Studio/portraits/eryk-dobek.png,05_Studio_And_Team.png,19,442,318,186,Masked cutout,"[0, 0, 318, 186]",Original photo pixels above the first line of lettering. Top corners follow the card radius.
+05-Studio/card-references/lara-mercado.png,05_Studio_And_Team.png,349,450,199,319,Exact crop,,
+05-Studio/portraits/lara-mercado.png,05_Studio_And_Team.png,351,452,195,173,Masked cutout,"[0, 0, 195, 173]",Original photo pixels above the first line of lettering. Top corners follow the card radius.
+05-Studio/card-references/marco-villanueva.png,05_Studio_And_Team.png,560,450,198,319,Exact crop,,
+05-Studio/portraits/marco-villanueva.png,05_Studio_And_Team.png,562,452,194,173,Masked cutout,"[0, 0, 194, 173]",Original photo pixels above the first line of lettering. Top corners follow the card radius.
+05-Studio/card-references/iris-santos.png,05_Studio_And_Team.png,771,450,199,319,Exact crop,,
+05-Studio/portraits/iris-santos.png,05_Studio_And_Team.png,773,452,195,173,Masked cutout,"[0, 0, 195, 173]",Original photo pixels above the first line of lettering. Top corners follow the card radius.
+05-Studio/card-references/kenji-ramos.png,05_Studio_And_Team.png,982,450,198,319,Exact crop,,
+05-Studio/portraits/kenji-ramos.png,05_Studio_And_Team.png,984,452,194,173,Masked cutout,"[0, 0, 194, 173]",Original photo pixels above the first line of lettering. Top corners follow the card radius.
+05-Studio/artwork/studio-culture-team.png,05_Studio_And_Team.png,29,807,533,287,Masked cutout,"[0, 0, 533, 287]",Corner mask follows the source photo.
+05-Studio/artwork/office-and-illuminated-sign.png,05_Studio_And_Team.png,460,64,739,227,Exact crop,,
+05-Studio/artwork/illuminated-wall-logo.png,05_Studio_And_Team.png,832,102,141,137,Exact crop,,
+05-Studio/artwork/footer-v-and-reflection.png,05_Studio_And_Team.png,67,1101,237,176,Exact crop,,
+05-Studio/backgrounds/studio-hero.png,05_Studio_And_Team.png,0,0,1199,412,Reconstructed,,Underlying pixels rebuilt where interface elements covered the artwork.
+05-Studio/backgrounds/join-the-studio.png,05_Studio_And_Team.png,0,1096,1199,216,Reconstructed,,Underlying pixels rebuilt where interface elements covered the artwork.
+Shared-Icons/studio/section-flash.png,05_Studio_And_Team.png,49,92,31,23,Masked cutout,"[2, 2, 28, 22]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/studio/play-circle.png,05_Studio_And_Team.png,240,320,43,43,Masked cutout,"[2, 2, 42, 40]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/studio/team.png,05_Studio_And_Team.png,569,306,36,37,Masked cutout,"[0, 0, 36, 32]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/studio/projects.png,05_Studio_And_Team.png,721,306,39,39,Masked cutout,"[6, 7, 33, 34]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/studio/industries.png,05_Studio_And_Team.png,885,305,38,39,Masked cutout,"[4, 4, 34, 33]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/studio/client-shield.png,05_Studio_And_Team.png,1049,304,38,42,Masked cutout,"[4, 0, 36, 36]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/studio/linkedin.png,05_Studio_And_Team.png,510,732,30,31,Masked cutout,"[1, 4, 28, 26]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/studio/create-bolt.png,05_Studio_And_Team.png,594,935,39,47,Masked cutout,"[4, 6, 36, 42]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/studio/collaborate.png,05_Studio_And_Team.png,746,937,51,42,Masked cutout,"[3, 3, 44, 39]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/studio/growth.png,05_Studio_And_Team.png,907,935,46,46,Masked cutout,"[3, 4, 38, 42]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/studio/impact-heart.png,05_Studio_And_Team.png,1057,935,48,47,Masked cutout,"[4, 6, 45, 47]",Local background estimated from perimeter pixels. Kept at source size.
+06-About/artwork/office-interior.png,06_About.png,787,73,412,371,Exact crop,,
+06-About/artwork/office-wall-logo.png,06_About.png,963,180,171,73,Exact crop,,
+06-About/artwork/v-and-orbit.png,06_About.png,480,125,307,232,Exact crop,,
+06-About/backgrounds/about-hero.png,06_About.png,0,0,1199,449,Reconstructed,,Underlying pixels rebuilt where interface elements covered the artwork.
+Shared-Icons/about/build-rocket.png,06_About.png,63,372,41,43,Masked cutout,"[4, 0, 41, 37]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/about/integrate-layers.png,06_About.png,241,371,42,43,Masked cutout,"[4, 4, 42, 37]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/about/partnerships.png,06_About.png,422,372,42,41,Masked cutout,"[2, 1, 38, 38]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/about/core-team.png,06_About.png,174,464,53,46,Masked cutout,"[0, 0, 53, 46]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/about/delivery-trophy.png,06_About.png,394,463,48,50,Masked cutout,"[3, 0, 46, 44]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/about/experience-calendar.png,06_About.png,626,463,47,47,Masked cutout,"[2, 0, 45, 43]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/about/global-clients.png,06_About.png,858,461,52,49,Masked cutout,"[3, 2, 47, 44]",Local background estimated from perimeter pixels. Kept at source size.
+06-About/industry-card-references/games.png,06_About.png,67,573,126,99,Exact crop,,
+06-About/industry-card-references/streaming.png,06_About.png,205,573,125,99,Exact crop,,
+06-About/industry-card-references/healthcare.png,06_About.png,343,573,124,99,Exact crop,,
+06-About/industry-card-references/fitness.png,06_About.png,480,573,124,99,Exact crop,,
+06-About/industry-card-references/fintech.png,06_About.png,617,573,123,99,Exact crop,,
+06-About/industry-card-references/web-mobile.png,06_About.png,752,573,127,99,Exact crop,,
+06-About/industry-card-references/hardware.png,06_About.png,892,573,127,99,Exact crop,,
+06-About/industry-card-references/robotics.png,06_About.png,1032,573,127,99,Exact crop,,
+Shared-Icons/industries/games.png,06_About.png,100,583,57,42,Masked cutout,"[0, 0, 57, 42]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/industries/streaming.png,06_About.png,244,582,47,43,Masked cutout,"[3, 3, 45, 40]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/industries/healthcare.png,06_About.png,378,583,51,41,Masked cutout,"[5, 2, 50, 40]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/industries/fitness.png,06_About.png,512,583,60,42,Masked cutout,"[4, 7, 55, 35]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/industries/fintech.png,06_About.png,653,582,50,43,Masked cutout,"[0, 0, 47, 43]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/industries/web-mobile.png,06_About.png,789,583,55,42,Masked cutout,"[2, 1, 49, 42]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/industries/hardware.png,06_About.png,931,582,50,43,Masked cutout,"[6, 0, 44, 41]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/industries/robotics.png,06_About.png,1071,581,49,45,Masked cutout,"[5, 5, 45, 40]",Local background estimated from perimeter pixels. Kept at source size.
+06-About/backgrounds/bottom-ribbons.png,06_About.png,0,673,1199,38,Reconstructed,,Underlying pixels rebuilt where interface elements covered the artwork.
+Shared-Icons/contact/section-flash.png,07_Contact.png,62,50,32,23,Masked cutout,"[4, 4, 29, 19]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/contact/email.png,07_Contact.png,74,297,43,36,Masked cutout,"[4, 4, 41, 32]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/contact/slack.png,07_Contact.png,74,342,44,43,Masked cutout,"[5, 5, 41, 38]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/contact/location.png,07_Contact.png,79,390,36,44,Masked cutout,"[3, 4, 33, 39]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/contact/response-time.png,07_Contact.png,77,439,43,44,Masked cutout,"[3, 4, 41, 38]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/contact/send-plane.png,07_Contact.png,498,58,40,36,Masked cutout,"[2, 0, 40, 36]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/contact/name.png,07_Contact.png,513,128,24,25,Masked cutout,"[1, 0, 23, 24]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/contact/email-field.png,07_Contact.png,837,127,29,27,Masked cutout,"[0, 0, 28, 24]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/contact/company.png,07_Contact.png,514,192,26,28,Masked cutout,"[2, 5, 24, 28]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/contact/project-type.png,07_Contact.png,837,191,30,28,Masked cutout,"[5, 0, 28, 28]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/contact/budget-wallet.png,07_Contact.png,514,258,31,26,Masked cutout,"[2, 0, 31, 26]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/contact/dropdown-chevron.png,07_Contact.png,777,262,22,19,Masked cutout,"[3, 4, 17, 16]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/contact/project-details.png,07_Contact.png,516,325,31,29,Masked cutout,"[2, 0, 31, 26]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/contact/privacy-lock.png,07_Contact.png,825,448,31,36,Masked cutout,"[4, 7, 29, 29]",Local background estimated from perimeter pixels. Kept at source size.
+07-Contact/artwork/globe-and-ribbons.png,07_Contact.png,251,405,215,208,Exact crop,,"Visible portion of the globe, ending before the inquiry panel."
+07-Contact/artwork/upper-light-ribbon.png,07_Contact.png,0,0,1199,39,Exact crop,,
+07-Contact/card-references/project-inquiry-form.png,07_Contact.png,465,40,695,481,Exact crop,,
+07-Contact/backgrounds/inquiry-glass-panel.png,07_Contact.png,465,40,695,481,Reconstructed,,Underlying pixels rebuilt where interface elements covered the artwork.
+04-Expertise/illustrations/full-stack-laptop.png,04_Expertise.png,464,151,124,115,Masked cutout,"[10, 7, 124, 109]",Source pixels isolated with a hand-drawn contour and local edge refinement.
+04-Expertise/illustrations/games-controller.png,04_Expertise.png,810,126,99,76,Masked cutout,"[5, 9, 94, 70]",Source pixels isolated with a hand-drawn contour and local edge refinement.
+04-Expertise/illustrations/advertising-dashboard.png,04_Expertise.png,1135,145,139,111,Masked cutout,"[6, 6, 134, 104]",Source pixels isolated with a hand-drawn contour and local edge refinement.
+04-Expertise/illustrations/mobile-app-phones.png,04_Expertise.png,396,298,129,121,Masked cutout,"[5, 3, 125, 116]",Source pixels isolated with a hand-drawn contour and local edge refinement.
+04-Expertise/illustrations/streaming-television.png,04_Expertise.png,1205,289,132,107,Masked cutout,"[6, 5, 127, 100]",Source pixels isolated with a hand-drawn contour and local edge refinement.
+04-Expertise/illustrations/healthcare-clipboard.png,04_Expertise.png,373,434,132,116,Masked cutout,"[6, 5, 126, 112]",Source pixels isolated with a hand-drawn contour and local edge refinement.
+04-Expertise/illustrations/fitness-watch.png,04_Expertise.png,1269,405,101,104,Masked cutout,"[5, 5, 95, 99]",Source pixels isolated with a hand-drawn contour and local edge refinement.
+04-Expertise/illustrations/pcb-board.png,04_Expertise.png,326,572,188,122,Masked cutout,"[4, 6, 184, 115]",Source pixels isolated with a hand-drawn contour and local edge refinement.
+04-Expertise/illustrations/fintech-card-and-coins.png,04_Expertise.png,1201,514,158,105,Masked cutout,"[7, 6, 153, 102]",Source pixels isolated with a hand-drawn contour and local edge refinement.
+04-Expertise/illustrations/cad-monitor.png,04_Expertise.png,770,681,129,113,Masked cutout,"[4, 4, 115, 107]",Source pixels isolated with a hand-drawn contour and local edge refinement.
+04-Expertise/illustrations/robotics-arm.png,04_Expertise.png,1208,634,138,118,Masked cutout,"[5, 4, 132, 112]",Source pixels isolated with a hand-drawn contour and local edge refinement.
+02-Our-Work/artwork/mountain-hero-v.png,02_Our_Work.png,647,62,278,198,Masked cutout,"[7, 6, 273, 192]",Source pixels isolated with a hand-drawn contour and local edge refinement.
+06-About/artwork/office-hero-v.png,06_About.png,492,138,262,191,Masked cutout,"[8, 6, 255, 183]",Source pixels isolated with a hand-drawn contour and local edge refinement.
+05-Studio/artwork/footer-v.png,05_Studio_And_Team.png,90,1109,194,157,Masked cutout,"[8, 5, 190, 150]",Source pixels isolated with a hand-drawn contour and local edge refinement.
+04-Expertise/artwork/central-v.png,04_Expertise.png,802,363,292,199,Masked cutout,"[6, 8, 284, 191]",Source pixels isolated with a hand-drawn contour and local edge refinement.
+03-Case-Study/artwork/smartphone.png,03_Project_Case_Study.png,536,184,163,274,Masked cutout,"[5, 3, 159, 273]",Source pixels isolated with a hand-drawn contour and local edge refinement.
+01-Home/motion-home-hero/01-landscape.png,01_Home.png,0,0,1672,581,Reconstructed,,Base layer. Terrain and atmosphere under the moving elements are reconstructed.
+01-Home/motion-home-hero/02-orbit.png,01_Home.png,699,226,883,269,Reconstructed,"[0, 0, 883, 269]",Continuous reconstructed orbit based on the source trail. Obscured spans are drawn through so the trail can move independently.
+01-Home/motion-home-hero/03-v.png,01_Home.png,797,98,635,413,Animation layer,"[0, 0, 635, 413]","Front layer. Native facets and refraction, with a reconstructed exterior glow."
+01-Home/motion-home-hero/04-resting-light.png,01_Home.png,699,92,883,424,Animation layer,"[0, 0, 883, 424]",Optional top layer for the exact resting pose. Fade this layer out when the V or orbit moves.
+01-Home/motion-ribbons/services-divider/01-base.png,01_Home.png,0,754,1672,92,Reconstructed,,Backing for the movable light strip. Restores the area hidden by the source ribbon.
+01-Home/motion-ribbons/services-divider/02-ribbon.png,01_Home.png,0,754,1672,92,Animation layer,"[0, 0, 1672, 92]",Transparent ribbon. Use the source coordinates to match the still or animate with a small translation.
+01-Home/motion-ribbons/services-divider/reference.png,01_Home.png,0,754,1672,92,Exact crop,,
+07-Contact/motion-ribbons/top-edge/01-base.png,07_Contact.png,0,0,1199,40,Reconstructed,,Backing for the movable light strip. Restores the area hidden by the source ribbon.
+07-Contact/motion-ribbons/top-edge/02-ribbon.png,07_Contact.png,0,0,1199,40,Animation layer,"[0, 0, 1199, 40]",Transparent ribbon. Use the source coordinates to match the still or animate with a small translation.
+07-Contact/motion-ribbons/top-edge/reference.png,07_Contact.png,0,0,1199,40,Exact crop,,
+03-Case-Study/motion-ribbons/footer-blue-crest/01-base.png,03_Project_Case_Study.png,0,1105,1199,66,Reconstructed,,Backing for the movable light strip. Restores the area hidden by the source ribbon.
+03-Case-Study/motion-ribbons/footer-blue-crest/02-ribbon.png,03_Project_Case_Study.png,0,1120,1199,51,Animation layer,"[0, 0, 1199, 51]",Transparent ribbon. Use the source coordinates to match the still or animate with a small translation.
+03-Case-Study/motion-ribbons/footer-blue-crest/reference.png,03_Project_Case_Study.png,0,1105,1199,66,Exact crop,,
+02-Our-Work/project-objects/ray-adventure-phone.png,02_Our_Work.png,125,354,268,220,Masked cutout,"[6, 5, 262, 220]",Source pixels isolated with a hand-drawn contour and local edge refinement.
+02-Our-Work/project-objects/streaming-tv.png,02_Our_Work.png,454,356,319,221,Masked cutout,"[5, 5, 315, 220]",Source pixels isolated with a hand-drawn contour and local edge refinement.
+02-Our-Work/project-objects/neo-health-laptop.png,02_Our_Work.png,812,363,357,211,Masked cutout,"[6, 5, 350, 211]",Source pixels isolated with a hand-drawn contour and local edge refinement.
+02-Our-Work/project-objects/banking-phone.png,02_Our_Work.png,139,750,254,196,Masked cutout,"[8, 5, 249, 196]",Source pixels isolated with a hand-drawn contour and local edge refinement.
+02-Our-Work/project-objects/embedded-pcb.png,02_Our_Work.png,435,757,349,189,Masked cutout,"[7, 0, 342, 189]",Source pixels isolated with a hand-drawn contour and local edge refinement.
+02-Our-Work/project-objects/industrial-robot-arm.png,02_Our_Work.png,897,748,265,194,Masked cutout,"[5, 4, 258, 187]",Source pixels isolated with a hand-drawn contour and local edge refinement.
+01-Home/artwork/hero-v-tight.png,01_Home.png,818,119,594,371,Masked cutout,"[4, 3, 588, 367]",Tight source silhouette for use outside the aligned motion composition. The original refraction remains inside the V.
+01-Home/card-objects/games-character.png,01_Home.png,222,582,147,169,Masked cutout,"[14, 0, 147, 169]",Source pixels isolated with a hand-drawn contour and local edge refinement.
+01-Home/card-objects/robot-arm.png,01_Home.png,1474,592,156,154,Masked cutout,"[11, 7, 156, 152]",Source pixels isolated with a hand-drawn contour and local edge refinement.
+01-Home/artwork/pedestal-and-reflection.png,01_Home.png,801,483,821,69,Exact crop,,
+01-Home/artwork/right-mountain-range.png,01_Home.png,1398,312,274,105,Exact crop,,
+05-Studio/artwork/studio-office-desk.png,05_Studio_And_Team.png,468,155,298,134,Exact crop,,
+07-Contact/backgrounds/globe-and-ribbons-backdrop.png,07_Contact.png,0,0,1199,613,Reconstructed,,The visible globe is extended behind the form using mirrored source texture. The hidden sky is interpolated.
+07-Contact/artwork/visible-globe-sector.png,07_Contact.png,252,401,215,191,Masked cutout,"[3, 2, 215, 191]",The source artwork ends at the inquiry panel. This asset contains the visible sector.
+04-Expertise/backgrounds/earth-and-dotted-waves.png,04_Expertise.png,0,0,1672,941,Reconstructed,,Text-free diagram backdrop retaining the visible edge scenery. Hidden central areas use a matched navy gradient.
+04-Expertise/backgrounds/expertise-diagram.png,04_Expertise.png,0,0,1672,941,Reconstructed,,Underlying pixels rebuilt where interface elements covered the artwork.
+04-Expertise/artwork/earth-horizon.png,04_Expertise.png,0,609,303,186,Exact crop,,
+04-Expertise/artwork/dotted-wave-detail.png,04_Expertise.png,1166,828,506,113,Exact crop,,
+05-Studio/motion-ribbons/studio-hero-wave/01-base.png,05_Studio_And_Team.png,0,341,1199,71,Reconstructed,,Backing for the movable light strip. Restores the area hidden by the source ribbon.
+05-Studio/motion-ribbons/studio-hero-wave/02-ribbon.png,05_Studio_And_Team.png,0,341,906,71,Animation layer,"[0, 0, 906, 71]",Transparent ribbon. Use the source coordinates to match the still or animate with a small translation.
+05-Studio/motion-ribbons/studio-hero-wave/reference.png,05_Studio_And_Team.png,0,341,1199,71,Exact crop,,
+06-About/motion-ribbons/lower-edge/01-base.png,06_About.png,0,676,1199,35,Reconstructed,,Backing for the movable light strip. Restores the area hidden by the source ribbon.
+06-About/motion-ribbons/lower-edge/02-ribbon.png,06_About.png,0,676,1199,35,Animation layer,"[0, 0, 1199, 35]",Transparent ribbon. Use the source coordinates to match the still or animate with a small translation.
+06-About/motion-ribbons/lower-edge/reference.png,06_About.png,0,676,1199,35,Exact crop,,
+Shared-Icons/home/watch-triangle.png,01_Home.png,404,441,33,34,Masked cutout,"[0, 0, 33, 34]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/case-study/project-card-arrow.png,03_Project_Case_Study.png,273,1057,25,22,Masked cutout,"[0, 0, 25, 22]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/case-study/footer-link-arrow.png,03_Project_Case_Study.png,1135,881,24,23,Masked cutout,"[5, 7, 20, 18]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/studio/culture-section-marker.png,05_Studio_And_Team.png,593,802,33,23,Masked cutout,"[2, 1, 33, 23]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/contact/form-dropdown-chevron.png,07_Contact.png,1096,196,25,18,Masked cutout,"[7, 4, 19, 14]",Local background estimated from perimeter pixels. Kept at source size.
+Shared-Icons/home/explore-arrow.png,01_Home.png,306,449,29,27,Masked cutout,"[2, 5, 29, 25]",Dark mark isolated from the lime button surface.
+Shared-Icons/home/explore-play.png,01_Home.png,112,449,25,29,Masked cutout,"[2, 5, 21, 25]",Dark mark isolated from the lime button surface.
+Shared-Icons/contact/conversation-arrow.png,07_Contact.png,730,456,28,25,Masked cutout,"[3, 4, 26, 22]",Dark mark isolated from the lime button surface.
+07-Contact/motion-ribbons/lower-edge/01-base.png,07_Contact.png,0,448,1199,165,Reconstructed,,Backing for the movable light strip. Restores the area hidden by the source ribbon.
+07-Contact/motion-ribbons/lower-edge/02-ribbon.png,07_Contact.png,0,448,1199,165,Animation layer,"[0, 0, 1199, 165]",Transparent ribbon. Use the source coordinates to match the still or animate with a small translation.
+07-Contact/motion-ribbons/lower-edge/reference.png,07_Contact.png,0,448,1199,165,Exact crop,,
+Shared-UI/surfaces/home-primary.png,01_Home.png,76,437,281,54,Reconstructed,"[0, 0, 281, 54]","Empty interface surface. Source border retained, interior restored for live labels."
+Shared-UI/surfaces/portfolio-outline.png,02_Our_Work.png,49,678,164,34,Reconstructed,"[0, 0, 164, 34]","Empty interface surface. Source border retained, interior restored for live labels."
+Shared-UI/surfaces/expertise-outline.png,04_Expertise.png,56,417,196,44,Reconstructed,"[0, 0, 196, 44]","Empty interface surface. Source border retained, interior restored for live labels."
+Shared-UI/surfaces/contact-submit.png,07_Contact.png,508,444,285,48,Reconstructed,"[0, 0, 285, 48]","Empty interface surface. Source border retained, interior restored for live labels."
+Shared-UI/surfaces/form-input.png,07_Contact.png,505,123,301,34,Reconstructed,"[0, 0, 301, 34]","Empty interface surface. Source border retained, interior restored for live labels."

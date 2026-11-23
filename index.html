@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#04112a" />
+    <meta name="color-scheme" content="dark" />
+    <meta
+      name="description"
+      content="Vellora Systems is a multi-disciplinary technology company that designs, engineers and delivers real products — from mobile games and streaming platforms to healthcare, fintech, hardware and robotics."
+    />
+    <title>Vellora Systems — Technology that moves ideas forward</title>
+    <link rel="icon" type="image/png" href="/assets/Shared-Brand/primary-home/symbol.png" />
+    <link rel="preload" href="/fonts/plus-jakarta-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/plus-jakarta-sans-latin-wght-italic.woff2" as="font" type="font/woff2" crossorigin />
+    <script>
+      // Start the above-the-fold hero plate early, but only on the route that shows it.
+      (function () {
+        if (location.pathname !== '/') return;
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.as = 'image';
+        l.setAttribute('fetchpriority', 'high');
+        l.setAttribute('imagesrcset', '/assets/01-Home/backgrounds/hero-with-v-w836.webp 836w, /assets/01-Home/backgrounds/hero-with-v.webp 1672w');
+        l.setAttribute('imagesizes', '100vw');
+        document.head.appendChild(l);
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript>
+      <p style="font-family: system-ui, sans-serif; color: #f5f6fa; background: #04112a; padding: 24px">
+        Vellora Systems — contact us at <a style="color: #d4fc4d" href="mailto:hello@vellorasystems.com">hello@vellorasystems.com</a>.
+        This site needs JavaScript for navigation.
+      </p>
+    </noscript>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

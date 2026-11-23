@@ -1,0 +1,352 @@
+/* =====================================================================
+   Contact — reference 1199 × 613 (design-reference/07_Contact.png)
+
+   Desktop (≥1024px): the composition scales with the viewport width. The
+   1px cap that other pages put on --dp is lifted here, so at 1624px the
+   intro starts near 6% and the panel spans ~39%–97%. The section is at
+   least one viewport tall and the artwork layer is cover-scaled to it, so
+   the lower ribbon always sits on the visible bottom edge. The fixed site
+   header stays visible; the reference frame starts at its lower edge.
+   ===================================================================== */
+.page--contact {
+  --design-w: 1199;
+  --dp: calc(100cqw / var(--design-w));
+  background: #061531;
+}
+
+/* ---------- Artwork layer (shared) ---------- */
+.ct { position: relative; overflow: hidden; }
+.ct-art {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+}
+.ct-art__backdrop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+}
+.ct-art__ribbon { position: absolute; left: 0; width: 100%; }
+.ct-art__ribbon--top { top: 0; }
+.ct-art__ribbon--low { top: calc(448 / 613 * 100%); }
+.ct__layout { position: relative; z-index: 1; }
+
+/* ---------- Mobile / tablet (stacked) ---------- */
+.ct { padding: calc(64px + 32px) 0 0; }
+.ct-art {
+  left: 0;
+  bottom: 0;
+  height: 640px;
+  aspect-ratio: 1199 / 613;
+  transform: translateX(-17%);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 38%);
+  mask-image: linear-gradient(180deg, transparent 0, #000 38%);
+}
+.ct__layout { display: grid; gap: 30px; padding: 0 var(--gutter) 200px; }
+
+.ct__eyebrow { font-size: 12px; letter-spacing: 0.18em; }
+.ct__eyebrow .eyebrow__flash { height: 15px; }
+.ct__title {
+  margin-top: 12px;
+  font-size: clamp(34px, 9vw, 44px);
+  line-height: 0.98;
+  font-weight: 800;
+  letter-spacing: -0.016em;
+}
+.ct__lead { margin-top: 14px; max-width: 30em; font-size: 15px; line-height: 1.45; color: #eef1f7; }
+.ct__methods { display: grid; gap: 14px; margin: 22px 0 0; padding: 0; list-style: none; }
+.ct-method { display: grid; grid-template-columns: 48px 1fr; column-gap: 14px; align-items: center; }
+.ct-method__icon { grid-row: span 2; justify-self: center; height: 34px; width: auto; }
+.ct-method__label { font-size: 14px; font-weight: 700; line-height: 1.3; }
+.ct-method__value { font-size: 15px; line-height: 1.3; color: #e6eaf2; overflow-wrap: anywhere; }
+.ct-method__link {
+  color: #f5f6fa;
+  text-decoration: underline;
+  text-decoration-color: rgba(120, 130, 255, 0.9);
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1.5px;
+}
+.ct-method__link:hover { color: var(--accent); }
+
+/* Panel: deep navy glass with a thin cyan → violet rim and a lime reflection (CSS approximation
+   of the supplied panel, used where the panel is not at its native proportions). */
+.inquiry {
+  position: relative;
+  padding: 22px 18px 24px;
+  border-radius: 20px;
+  background:
+    radial-gradient(40% 18% at 40% 100%, rgba(150, 230, 70, 0.22), transparent 70%),
+    radial-gradient(30% 40% at 100% 70%, rgba(140, 60, 230, 0.35), transparent 70%),
+    radial-gradient(40% 30% at 0% 0%, rgba(40, 170, 240, 0.25), transparent 70%),
+    #0a1a3c;
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.35);
+}
+.inquiry::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 1.5px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, #46d3ff 0%, rgba(70, 150, 255, 0.55) 40%, rgba(150, 90, 255, 0.6) 70%, #b06bff 100%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  pointer-events: none;
+}
+.inquiry__head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 16px; }
+.inquiry__title { display: flex; align-items: center; gap: 10px; font-size: 23px; font-weight: 700; }
+.inquiry__plane { width: 36px; height: auto; }
+.inquiry__sub { font-size: 13.4px; color: #e6eaf2; }
+.inquiry__grid { display: grid; grid-template-columns: 1fr; gap: 14px; margin-top: 18px; }
+
+/* Controls: sampled from the reference — cooler cyan edges on the left column, violet on the right. */
+.inquiry .input {
+  --edge-a: #22659f;
+  --edge-b: #2a5288;
+  border: 1px solid transparent;
+  background:
+    linear-gradient(180deg, #213e68, #1b335a) padding-box,
+    linear-gradient(90deg, var(--edge-a), var(--edge-b)) border-box;
+  box-shadow: inset 0 1px 0 rgba(130, 170, 230, 0.16);
+  color: var(--text);
+}
+.inquiry .f-email .input,
+.inquiry .f-type .input {
+  --edge-a: #2b6fab;
+  --edge-b: #6a4bb0;
+  background:
+    linear-gradient(180deg, #24365f, #1e2c55) padding-box,
+    linear-gradient(90deg, var(--edge-a), var(--edge-b)) border-box;
+}
+.inquiry .f-details .input {
+  --edge-a: #2a6aa6;
+  --edge-b: #563c99;
+  background:
+    linear-gradient(180deg, #1f3966, #1b305c) padding-box,
+    linear-gradient(90deg, var(--edge-a), var(--edge-b)) border-box;
+}
+.inquiry .input:hover { --edge-a: #3a8cd0; }
+.inquiry .input:focus {
+  --edge-a: var(--focus);
+  --edge-b: var(--focus);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(240, 255, 138, 0.22);
+}
+.inquiry .input[aria-invalid='true'] { --edge-a: #ff6b86; --edge-b: #ff6b86; }
+.inquiry .input::placeholder { color: #a7b6cd; }
+.inquiry__counter {
+  position: absolute;
+  right: 12px;
+  bottom: 9px;
+  font-size: 12px;
+  color: #b9c5d9;
+  pointer-events: none;
+}
+
+.inquiry__foot { display: grid; gap: 14px; margin-top: 22px; }
+.inquiry__submit {
+  --btn-h: 50px;
+  justify-self: start;
+  padding-inline: 32px 28px;
+  font-size: 17px;
+  color: #0b1505;
+  /* saturated lime pill, tight glow (the global primary halo is too broad here) */
+  background: linear-gradient(180deg, #ecff57 0%, #d8fb3a 45%, #b5ea1c 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55), inset 0 -2px 4px rgba(70, 110, 0, 0.35), 0 0 10px rgba(205, 252, 70, 0.22);
+}
+.inquiry__submit:hover { filter: brightness(1.05); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55), inset 0 -2px 4px rgba(70, 110, 0, 0.35), 0 0 16px rgba(205, 252, 70, 0.35); }
+.inquiry__submit[disabled] { filter: saturate(0.6) brightness(0.9); cursor: progress; }
+.inquiry__submit .btn__arrow { width: 26px; }
+.inquiry__notes { display: grid; }
+.inquiry__privacy { display: flex; gap: 12px; align-items: flex-start; font-size: 12.5px; line-height: 1.35; color: #dfe4ee; }
+.inquiry__lock { width: 24px; height: auto; flex: none; margin-top: 1px; max-width: none; }
+.inquiry__summary:empty { display: none; }
+.inquiry__summary { margin-top: 14px; color: #ffb3c0; font-weight: 700; font-size: 14px; }
+.inquiry__result-wrap:focus { outline: none; }
+.inquiry__result {
+  margin-top: 16px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(212, 252, 77, 0.55);
+  background: rgba(20, 40, 14, 0.72);
+  font-size: 14.5px;
+  line-height: 1.45;
+}
+.inquiry__result--error { border-color: rgba(255, 110, 135, 0.7); background: rgba(70, 10, 24, 0.6); }
+.inquiry__result-title { font-weight: 800; font-size: 15.5px; margin-bottom: 4px; }
+.inquiry__result-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+.inquiry__result-actions .btn { --btn-h: 40px; font-size: 14px; }
+
+@media (min-width: 640px) {
+  .inquiry { padding: 26px 30px 28px; }
+  .inquiry__grid { grid-template-columns: 1fr 1fr; column-gap: 24px; row-gap: 14px; }
+  .f-budget { grid-column: 1; }
+  .f-details { grid-column: 1 / -1; }
+  .inquiry__foot { grid-template-columns: auto 1fr; align-items: center; column-gap: 28px; }
+}
+
+/* =====================================================================
+   Desktop composition — reference pixels (1 unit = 1/1199 of the width)
+   ===================================================================== */
+@media (min-width: 1024px) {
+  /* The fixed header stays visible. The contact section's origin is the header's lower edge: the
+     1199 × 613 reference frame starts there; the artwork covers the whole section, behind the
+     header too, and its lower ribbon sits on the bottom edge. */
+  .ct {
+    /* scene height below the header */
+    --ct-h: max(calc(100vh - var(--hh)), calc(613 * var(--dp)));
+    display: grid;
+    align-items: start;
+    min-height: calc(var(--hh) + var(--ct-h));
+    padding: 0;
+  }
+  /* The scene starts at the header's lower edge (the contact section's origin) and covers the
+     space below it at the source aspect; its lower ribbon sits on the bottom edge. */
+  .ct-art {
+    top: auto;
+    bottom: 0;
+    left: 50%;
+    width: max(100%, calc(var(--ct-h) * 1199 / 613));
+    height: auto;
+    aspect-ratio: 1199 / 613;
+    transform: translateX(-50%);
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  /* Standalone composition: no visible header or reserved space. The full 1199 × 613 frame sits
+     at the reference positions; extra viewport height is shared above and below. If the form
+     grows (validation messages) the section grows with it and the artwork keeps covering. */
+  .ct__layout {
+    display: grid;
+    grid-template-columns: calc(465 * var(--dp)) calc(695 * var(--dp));
+    align-items: start;
+    gap: 0;
+    padding: calc(var(--hh) + max(0px, (var(--ct-h) - 613 * var(--dp)) / 2)) 0 0;
+  }
+
+  /* Intro column — normal flow; margins land the reference anchors. */
+  .ct__intro { padding: calc(50 * var(--dp)) 0 0 calc(62 * var(--dp)); }
+  .ct__eyebrow {
+    display: flex; /* the shared eyebrow is inline-flex; on a line strut it pushed the column down 6px */
+    height: calc(23 * var(--dp));
+    gap: calc(7 * var(--dp));
+    font-size: max(10px, calc(10.8 * var(--dp)));
+    letter-spacing: 0.18em;
+    line-height: 1;
+  }
+  .ct__eyebrow .eyebrow__flash { width: calc(32 * var(--dp)); height: auto; }
+  .ct__title {
+    margin: calc(7.7 * var(--dp)) 0 0 calc(6 * var(--dp));
+    font-size: calc(44.3 * var(--dp));
+    line-height: calc(42.5 * var(--dp));
+    letter-spacing: -0.006em;
+    white-space: nowrap;
+  }
+  /* The reference sets its second line tighter than the first. */
+  .ct__title-l2 { letter-spacing: -0.034em; }
+  .ct__title .t-lime { font-weight: 820; letter-spacing: 0.024em; }
+  .ct__lead {
+    margin: calc(14.2 * var(--dp)) 0 0 calc(8 * var(--dp));
+    max-width: none;
+    white-space: nowrap;
+    font-size: max(12px, calc(14 * var(--dp)));
+    line-height: calc(18.5 * var(--dp));
+  }
+  /* The reference sets the later lead lines slightly tighter than the first. */
+  .ct__lead-l2 { letter-spacing: -0.015em; }
+  .ct__lead-l3 { letter-spacing: -0.02em; }
+  .ct__methods { margin: calc(14.4 * var(--dp)) 0 0 calc(7 * var(--dp)); row-gap: calc(12.5 * var(--dp)); }
+  /* Row height comes from the two text lines, not the 43–44px icons (they overflow, centred). */
+  .ct-method {
+    grid-template-columns: calc(54 * var(--dp)) auto;
+    grid-template-rows: calc(18.5 * var(--dp)) calc(18 * var(--dp));
+    column-gap: calc(17 * var(--dp));
+  }
+  .ct-method__icon { align-self: center; transform: translateY(calc(4 * var(--dp))); }
+  .ct-method__label { font-size: max(11.5px, calc(13.6 * var(--dp))); line-height: calc(18.5 * var(--dp)); white-space: nowrap; }
+  .ct-method__value { font-size: max(12px, calc(13 * var(--dp))); line-height: calc(18 * var(--dp)); white-space: nowrap; }
+  .ct-method--email .ct-method__icon { width: calc(43 * var(--dp)); }
+  .ct-method--slack .ct-method__icon { width: calc(44 * var(--dp)); }
+  .ct-method--location .ct-method__icon { width: calc(36 * var(--dp)); }
+  .ct-method--response .ct-method__icon { width: calc(43 * var(--dp)); }
+  .ct-method__icon { height: auto; }
+
+  /* Panel — the supplied glass panel (465,40 695×481) carries the rim lighting. */
+  .inquiry {
+    margin-top: calc(40 * var(--dp));
+    width: calc(695 * var(--dp));
+    min-height: calc(481 * var(--dp));
+    padding: calc(18 * var(--dp)) calc(32 * var(--dp)) calc(29 * var(--dp)) calc(40 * var(--dp));
+    border-radius: calc(20 * var(--dp));
+    background: var(--panel-art) 0 0 / 100% 100% no-repeat, #09193a;
+    box-shadow: none;
+  }
+  .inquiry::before { display: none; }
+
+  .inquiry__head { height: calc(36 * var(--dp)); flex-wrap: nowrap; }
+  .inquiry__title { margin-left: calc(-7 * var(--dp)); gap: calc(8 * var(--dp)); font-size: calc(22 * var(--dp)); line-height: calc(36 * var(--dp)); }
+  .inquiry__plane { width: calc(40 * var(--dp)); }
+  .inquiry__sub { margin-right: calc(4 * var(--dp)); font-size: max(11.5px, calc(13.4 * var(--dp))); line-height: 1; }
+
+  .inquiry__grid {
+    margin-top: calc(11 * var(--dp));
+    grid-template-columns: calc(301 * var(--dp)) calc(298 * var(--dp));
+    column-gap: calc(24 * var(--dp));
+    row-gap: calc(13 * var(--dp));
+  }
+  .inquiry .field { gap: calc(4 * var(--dp)); }
+  .inquiry .field__label { font-size: max(11px, calc(11.7 * var(--dp))); line-height: calc(14 * var(--dp)); }
+  .f-details { margin-top: calc(4 * var(--dp)); }
+  .inquiry .input {
+    min-height: 0;
+    height: calc(34 * var(--dp));
+    padding: 0 calc(12 * var(--dp)) 0 calc(40.5 * var(--dp));
+    border-radius: calc(7 * var(--dp));
+    font-size: max(11.5px, calc(11.8 * var(--dp)));
+  }
+  .inquiry select.input { padding-right: calc(36 * var(--dp)); }
+  .inquiry textarea.input {
+    height: calc(99 * var(--dp));
+    padding-top: calc(9 * var(--dp));
+    line-height: calc(19 * var(--dp));
+    resize: none;
+  }
+  .inquiry .field__icon { left: calc(8 * var(--dp)); height: auto; }
+  .f-name .field__icon { width: calc(24 * var(--dp)); }
+  .f-email .field__icon { left: calc(7 * var(--dp)); width: calc(29 * var(--dp)); }
+  .f-company .field__icon { left: calc(9 * var(--dp)); width: calc(26 * var(--dp)); }
+  .f-type .field__icon { left: calc(7 * var(--dp)); width: calc(30 * var(--dp)); }
+  .f-budget .field__icon { left: calc(9 * var(--dp)); width: calc(31 * var(--dp)); }
+  .f-details .field__icon { left: calc(11 * var(--dp)); top: calc(3 * var(--dp)); width: calc(31 * var(--dp)); }
+  .inquiry .field__chevron { right: calc(7 * var(--dp)); }
+  .f-budget .field__chevron { width: calc(22 * var(--dp)); }
+  .f-type .field__chevron { width: calc(25 * var(--dp)); }
+  .inquiry__counter { right: calc(12 * var(--dp)); bottom: calc(8 * var(--dp)); font-size: max(10.5px, calc(11.4 * var(--dp))); }
+  .inquiry .field__error { font-size: max(11.5px, calc(12.4 * var(--dp))); }
+
+  .inquiry__foot {
+    margin-top: calc(24 * var(--dp));
+    grid-template-columns: calc(285 * var(--dp)) auto;
+    column-gap: calc(35 * var(--dp));
+    align-items: start;
+  }
+  .inquiry__submit {
+    --btn-h: calc(47 * var(--dp));
+    min-height: max(40px, calc(47 * var(--dp)));
+    width: calc(285 * var(--dp));
+    margin-left: calc(3 * var(--dp));
+    padding: 0;
+    gap: calc(14 * var(--dp));
+    font-size: max(14px, calc(17.4 * var(--dp)));
+    background: var(--submit-art) 0 0 / 100% 100% no-repeat;
+    box-shadow: 0 0 8px rgba(205, 252, 70, 0.18);
+  }
+  .inquiry__submit:hover { box-shadow: 0 0 14px rgba(205, 252, 70, 0.32); }
+  .inquiry__submit .btn__arrow { width: calc(28 * var(--dp)); }
+  .inquiry__notes { padding-top: calc(5 * var(--dp)); }
+  .inquiry__privacy { gap: calc(5 * var(--dp)); font-size: max(10.5px, calc(12 * var(--dp))); line-height: calc(16 * var(--dp)); white-space: nowrap; }
+  .inquiry__lock { width: calc(31 * var(--dp)); margin-top: calc(-1 * var(--dp)); }
+}
